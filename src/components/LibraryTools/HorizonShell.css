@@ -1,0 +1,238 @@
+.horizon-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #0a0c08;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.horizon-shell__titlebar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: #0e100c;
+}
+
+.horizon-shell__logo {
+  color: #cbe86a;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.horizon-shell__spacer {
+  flex: 1 1 auto;
+}
+
+.horizon-shell__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.horizon-shell__dot--yellow {
+  background: #e0c23c;
+}
+
+.horizon-shell__dot--green {
+  background: #6fbf3c;
+}
+
+.horizon-shell__dot--red {
+  background: #d0503c;
+}
+
+.horizon-shell__topnav {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 10px 6px;
+  background: linear-gradient(180deg, #1e2318 0%, #0e100c 100%);
+  border-bottom: 1px solid #2c2f28;
+}
+
+.horizon-shell__tab {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #a9b39a;
+  font-size: 11px;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.horizon-shell__tab:hover {
+  background: #1c2018;
+}
+
+.horizon-shell__tab--active {
+  background: linear-gradient(180deg, #cbe86a 0%, #86b31d 100%);
+  color: #0d1206;
+  font-weight: 600;
+}
+
+.horizon-shell__body {
+  flex: 1 1 auto;
+  display: flex;
+  min-height: 0;
+  padding: 8px 0 8px 8px;
+  gap: 0;
+}
+
+.horizon-shell__main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Tab ngang Methods / Outputs / Results, có icon, căn giữa */
+.horizon-shell__category-tabs {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 4px 6px;
+  background: #0e100c;
+  border-bottom: 1px solid #2c2f28;
+}
+
+.horizon-shell__category-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #c7cdbb;
+  font-size: 12px;
+  padding: 5px 14px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.horizon-shell__category-tab:hover {
+  background: #171a14;
+}
+
+.horizon-shell__category-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 3px;
+  color: #0d1206;
+}
+
+.horizon-shell__category-icon--methods {
+  background: linear-gradient(180deg, #8fd13f 0%, #5c9a1f 100%);
+}
+
+.horizon-shell__category-icon--outputs {
+  background: linear-gradient(180deg, #b48fe6 0%, #7a4fc4 100%);
+}
+
+.horizon-shell__category-icon--results {
+  background: linear-gradient(180deg, #f28fc9 0%, #c94f9e 100%);
+  font-style: italic;
+  font-size: 9px;
+}
+
+.horizon-shell__category-tab--active {
+  background: #1a1d16;
+  border-color: #d9b23c;
+  box-shadow: 0 0 0 1px #d9b23c inset;
+  color: #f4ecc9;
+}
+
+.horizon-shell__main-content {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.horizon-shell__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #6b7362;
+  font-size: 12px;
+}
+
+.horizon-shell__stub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 100%;
+  background: #101210;
+  border: 1px solid #2c2f28;
+  border-radius: 2px;
+}
+
+.horizon-shell__stub-title {
+  color: #cfd6c4;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.horizon-shell__stub-hint {
+  color: #6b7362;
+  font-size: 11px;
+}
+
+/* Rail dọc bám mép phải: Machine Control */
+.horizon-shell__rail {
+  flex: 0 0 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: #12140f;
+  border-left: 1px solid #2c2f28;
+}
+
+.horizon-shell__rail-item {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  appearance: none;
+  border: none;
+  border-bottom: 1px solid #2c2f28;
+  background: #12140f;
+  color: #a9b39a;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  padding: 10px 4px;
+  cursor: pointer;
+}
+
+.horizon-shell__rail-item--active {
+  background: linear-gradient(180deg, #cbe86a 0%, #86b31d 100%);
+  color: #0d1206;
+  font-weight: 600;
+}
+
+.horizon-shell__footer {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 28px;
+  padding: 6px 12px;
+  background: #0e100c;
+  border-top: 1px solid #2c2f28;
+  color: #8a9280;
+  font-size: 10.5px;
+}
+
+.horizon-shell__footer strong {
+  color: #cbe86a;
+  font-weight: 600;
+  margin-right: 4px;
+}
