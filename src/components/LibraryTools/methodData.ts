@@ -1,0 +1,88 @@
+import type { TestMethod } from "../../types";
+
+export const WORKING_METHODS: TestMethod[] = [
+  {
+    id: "m1",
+    name: "EN ISO 2411 - Adhesion of Rubber- or Plastic-Coated...",
+    equipment: "UTM/MTM",
+    lastModified: "2/8/2017 3:20:56 AM",
+    methodType: "Designed for 180° Peel testing...",
+    notes: "",
+    inUse: true,
+  },
+  {
+    id: "m2",
+    name: "Generic 180° Peel",
+    equipment: "UTM/MTM",
+    lastModified: "5/24/2016 2:24:36 PM",
+    methodType: "Designed for 180° Peel testing...",
+    notes: "",
+  },
+  {
+    id: "m3",
+    name: "Generic 7 Strand",
+    equipment: "UTM/MTM & Strain Extensometer",
+    lastModified: "3/10/2015 12:08:07 PM",
+    methodType: "Designed for testing 7 Strand...",
+    notes: "",
+  },
+  {
+    id: "m4",
+    name: "Generic 3 Strand - Continue Strain From Position",
+    equipment: "UTM/MTM & Strain Extensometer",
+    lastModified: "9/9/2013 10:36:41 AM",
+    methodType: "Designed for testing 7 Strand...",
+    notes: "",
+  },
+  {
+    id: "m5",
+    name: "Generic Sheet Hardness",
+    equipment: "UTM/MTM with Brinell Hardness",
+    lastModified: "6/30/2016 7:58:16 AM",
+    methodType: "Designed for testing with a UTM...",
+    notes: "",
+    selected: true,
+  },
+  {
+    id: "m6",
+    name: "Generic Climbing Drum Peel",
+    equipment: "UTM/MTM",
+    lastModified: "1/20/2012 3:16:34 PM",
+    methodType: "Designed for Climbing Drum Peel",
+    notes: "",
+  },
+  {
+    id: "m7",
+    name: "Generic Compression - Force vs. Position",
+    equipment: "UTM/MTM",
+    lastModified: "10/23/2024 9:55:06 AM",
+    methodType: "Designed for Compression...",
+    notes: "",
+  },
+  {
+    id: "m8",
+    name: "Generic Compression - Force vs. Position using SlopeChange",
+    equipment: "UTM/MTM",
+    lastModified: "7/20/2023 9:11:39 AM",
+    methodType: "Designed for Compression...",
+    notes: "",
+  },
+  {
+    id: "m9",
+    name: "Generic Compression - Force vs. Time",
+    equipment: "UTM/MTM",
+    lastModified: "1/30/2015 10:47:50 AM",
+    methodType: "Designed for Compression",
+    notes: "",
+  },
+  {
+    id: "m10",
+    name: "Generic Compression - Set Initial Platen to Zero and Park...",
+    equipment: "UTM/MTM",
+    lastModified: "2/26/2015 11:35:09 AM",
+    methodType: "A utility method to allow you to...",
+    notes: "Used for methods that start from...",
+  },
+];
+
+export const STANDARD_METHODS: TestMethod[] = WORKING_METHODS.slice(0, 6);

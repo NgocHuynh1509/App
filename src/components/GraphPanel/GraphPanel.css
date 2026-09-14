@@ -1,0 +1,59 @@
+.graph-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  background: #f4f4f1;
+  border: 1px solid #2c2f28;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.graph-panel__header {
+  flex: 0 0 22px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #eef2e6;
+  background: linear-gradient(180deg, #2b3222 0%, #171a13 100%);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.graph-panel__svg {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  background: #ffffff;
+}
+
+.graph-panel__gridline {
+  stroke: #d7d7d0;
+  stroke-width: 1;
+}
+
+.graph-panel__tick {
+  font-size: 9px;
+  fill: #4a4a44;
+  font-family: inherit;
+}
+
+.graph-panel__tick--y {
+  text-anchor: end;
+}
+
+.graph-panel__tick--x {
+  text-anchor: middle;
+}
+
+.graph-panel__axis-label {
+  font-size: 10px;
+  fill: #2b2b26;
+  text-anchor: middle;
+}
+
+.graph-panel__curve {
+  fill: none;
+  stroke: #2c2f28;
+  stroke-width: 1.6;
+}

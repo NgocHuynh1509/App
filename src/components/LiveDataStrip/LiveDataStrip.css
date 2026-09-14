@@ -1,0 +1,35 @@
+.live-data-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  flex: 0 0 46px;
+  padding: 4px 0;
+}
+
+.live-data-strip__cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #2c2f28;
+  border-radius: 12px;
+  padding: 3px 6px;
+}
+
+.live-data-strip__label {
+  font-size: 9.5px;
+  color: #3d4038;
+}
+
+.live-data-strip__value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #14170f;
+}
+
+.live-data-strip__unit {
+  font-size: 9px;
+  font-weight: 400;
+  color: #6a6d63;
+}
