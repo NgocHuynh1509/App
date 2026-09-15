@@ -1,0 +1,130 @@
+.tr-workspace {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #d0d0d0;
+
+  border: 1px solid #666;
+
+  box-sizing: border-box;
+
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+/* =========================
+   MAIN TABS
+========================= */
+
+.tr-workspace__tabs {
+  height: 29px;
+
+  display: flex;
+  align-items: flex-end;
+
+  padding: 0 4px;
+
+  gap: 2px;
+
+  background: #bcbcbc;
+
+  border-bottom: 1px solid #666;
+
+  box-sizing: border-box;
+}
+
+.tr-workspace__tab {
+  height: 26px;
+
+  min-width: 90px;
+
+  padding: 3px 15px;
+
+  background: #cfcfcf;
+
+  color: #222;
+
+  border: 1px solid #777;
+  border-bottom: none;
+
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.tr-workspace__tab:hover {
+  background: #e5e5e5;
+}
+
+.tr-workspace__tab--active {
+  position: relative;
+
+  height: 27px;
+
+  background: #d4d4d4;
+
+  color: #111;
+
+  font-weight: bold;
+
+  border-top: 2px solid #496b89;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.tr-workspace__content {
+  flex: 1;
+  min-height: 0;
+
+  padding: 5px;
+
+  background: #d4d4d4;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+/* =========================
+   COMMON HORIZON PANEL
+========================= */
+
+.industrial-panel {
+  background: #dedede;
+
+  border: 1px solid #707070;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 0;
+}
+
+.industrial-panel__header {
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 7px;
+
+  background: linear-gradient(
+    to bottom,
+    #6c7884,
+    #48535e
+  );
+
+  color: #fff;
+
+  border-bottom: 1px solid #303030;
+
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+}
