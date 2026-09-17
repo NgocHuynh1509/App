@@ -37,7 +37,7 @@ export const s = {
     minHeight: 0,
     minWidth: 0,
     overflow: "auto",
-    padding: 10,
+    padding: 6,
     boxSizing: "border-box",
   } as CSSProperties,
 
@@ -45,21 +45,55 @@ export const s = {
     background: colors.headerBg,
     color: colors.headerText,
     fontWeight: 600,
-    padding: "4px 8px",
+    padding: "3px 8px",
     fontSize: 12,
   } as CSSProperties,
 
+  // Chiếm toàn bộ chiều cao khả dụng: khối 2 cột (Requirements+Graph Preview /
+  // Graph Options) co giãn để vừa màn hình, Plots luôn cố định hiện bên dưới —
+  // không cần cuộn cả trang.
+  stackCol: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 6,
+    width: "100%",
+    height: "100%",
+    minHeight: 0,
+    boxSizing: "border-box",
+  } as CSSProperties,
+
+  // flex-grow 2 (twoColRow) : 1 (fullWidthPane) => xấp xỉ 2/3 : 1/3 chiều cao.
   twoColRow: {
     display: "flex",
-    alignItems: "flex-start",
-    gap: 10,
+    alignItems: "stretch",
+    flex: "2 1 0%",
+    minHeight: 0,
+    gap: 6,
     width: "100%",
     boxSizing: "border-box",
   } as CSSProperties,
 
+  // minHeight: 0 + overflowY: "auto" để mỗi cột tự cuộn riêng khi nội dung dài
+  // hơn chiều cao đang có, thay vì đẩy cả trang giãn ra.
   colPane: {
     flex: "1 1 0%",
     minWidth: 0,
+    minHeight: 0,
+    overflowY: "auto",
+    background: colors.panelBg,
+    border: `1px solid ${colors.border}`,
+    display: "flex",
+    flexDirection: "column",
+    boxSizing: "border-box",
+  } as CSSProperties,
+
+  // Plots: chiếm ~1/3 chiều cao còn lại (flex-grow 1, cân với twoColRow=2)
+  // và tự cuộn nội bộ nếu bảng dài hơn phần đang có.
+  fullWidthPane: {
+    flex: "1 1 0%",
+    minHeight: 0,
+    overflowY: "auto",
+    width: "100%",
     background: colors.panelBg,
     border: `1px solid ${colors.border}`,
     display: "flex",
@@ -109,7 +143,7 @@ export const s = {
     display: "flex",
     alignItems: "center",
     gap: 6,
-    padding: "3px 8px",
+    padding: "1px 8px",
     fontSize: 12,
     boxSizing: "border-box",
   } as CSSProperties,
@@ -118,7 +152,7 @@ export const s = {
     display: "flex",
     alignItems: "center",
     gap: 6,
-    padding: "2px 8px",
+    padding: "1px 8px",
     minWidth: 0,
     boxSizing: "border-box",
   } as CSSProperties,
@@ -166,13 +200,13 @@ export const s = {
     minWidth: 0,
     border: `1px solid ${colors.border}`,
     borderRadius: 3,
-    padding: "6px 0",
+    padding: "3px 0",
     boxSizing: "border-box",
   } as CSSProperties,
 
   axisBlockTitle: {
     fontSize: 11,
     fontWeight: 600,
-    padding: "0 6px 4px",
+    padding: "0 6px 2px",
   } as CSSProperties,
 };
