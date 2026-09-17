@@ -1,6 +1,5 @@
 import type { LiveData, GraphPoint, Specimen } from "../../types";
 import GraphPanel from "../GraphPanel/GraphPanel";
-import LiveDataStrip from "../LiveDataStrip/LiveDataStrip";
 import SpecimenTable from "../SpecimenTable/SpecimenTable";
 import "./H5kTTab.css";
 
@@ -10,174 +9,175 @@ interface Props {
   specimens: Specimen[];
 }
 
-export default function H5kTTab({
-  liveData,
-  curve,
-  specimens,
-}: Props) {
+export default function H5kTTab({ liveData, curve, specimens }: Props) {
   return (
     <div className="h5kt-tab">
-      {/* TOOLBAR */}
-      <div className="horizon-toolbar">
-        <div className="toolbar-group">
-          <button className="horizon-button horizon-button--green">
-            ▶ Start
-          </button>
-
-          <button className="horizon-button">
-            ‖ Pause
-          </button>
-
-          <button className="horizon-button horizon-button--red">
-            ■ Stop
-          </button>
-
-          <button className="horizon-button">
-            ↻ Reset
-          </button>
-        </div>
-
-        <div className="toolbar-separator" />
-
-        <div className="toolbar-group">
-          <button className="horizon-button">
-            New Test
-          </button>
-
-          <button className="horizon-button">
-            Save Test
-          </button>
-
-          <button className="horizon-button">
-            Recall
-          </button>
-        </div>
-
-        <div className="toolbar-spacer" />
-
-        <div className="machine-status">
-          <span className="machine-status__lamp" />
-          <span>Machine Ready</span>
-        </div>
+      {/* MACHINE STATUS LINE */}
+      <div className="h5kt-status-line">
+        <span>Machine Status:</span>
+        <span className="h5kt-status-badge">(Demonstration Mode)</span>
+        <span className="h5kt-status-spacer" />
+        <button className="h5kt-btn-dropdown">Panels ▾</button>
+        <button className="h5kt-btn-dropdown">Layouts ▾</button>
       </div>
 
-      {/* MAIN */}
-      <div className="h5kt-main">
-        {/* LEFT MACHINE CONTROL */}
-        <section className="horizon-panel h5kt-machine">
-          <div className="horizon-panel__title">
-            MACHINE CONTROL
+      {/* TOP WORKSPACE: GRAPH & SIDEBAR */}
+      <div className="h5kt-top-content">
+        {/* GRAPH PANEL */}
+        <section className="h5kt-panel h5kt-graph-panel">
+          <div className="h5kt-panel-header">
+            <span>Graph</span>
+            <div className="h5kt-panel-actions">
+              <button title="Maximize">□</button>
+              <button title="Close">✕</button>
+            </div>
           </div>
-
-          <div className="horizon-panel__content">
-            <div className="machine-name">
-              <div className="machine-name__label">
-                MACHINE
-              </div>
-
-              <div className="machine-name__value">
-                TOVMC 3005T
-              </div>
-            </div>
-
-            <div className="machine-section">
-              <div className="machine-section__title">
-                Force
-              </div>
-
-              <div className="digital-display">
-                <span>{liveData.force.toFixed(2)}</span>
-                <small>lbf</small>
-              </div>
-            </div>
-
-            <div className="machine-section">
-              <div className="machine-section__title">
-                Position
-              </div>
-
-              <div className="digital-display">
-                <span>{liveData.position.toFixed(4)}</span>
-                <small>in</small>
-              </div>
-            </div>
-
-            <div className="machine-section">
-              <div className="machine-section__title">
-                Jog Control
-              </div>
-
-              <div className="jog-control">
-                <button>▲</button>
-
-                <div className="jog-track">
-                  <div className="jog-indicator" />
-                </div>
-
-                <button>▼</button>
-              </div>
-            </div>
-
-            <div className="machine-section">
-              <div className="machine-section__title">
-                Crosshead Speed
-              </div>
-
-              <div className="speed-row">
-                <span>Speed 1</span>
-                <strong>0.5 in/min</strong>
-              </div>
-
-              <div className="speed-row">
-                <span>Speed 2</span>
-                <strong>2.0 in/min</strong>
-              </div>
-            </div>
-
-            <div className="machine-jog-buttons">
-              <button>◀</button>
-              <button>▲</button>
-              <button>●</button>
-              <button>▼</button>
-              <button>▶</button>
-            </div>
+          <div className="h5kt-graph-content">
+            <GraphPanel data={curve} maxForce={7500} maxPosition={0.13} />
           </div>
         </section>
 
-        {/* GRAPH */}
-        <section className="horizon-panel h5kt-graph">
-          <div className="horizon-panel__title">
-            FORCE vs POSITION
-          </div>
+        {/* RIGHT SIDEBAR */}
+        <div className="h5kt-right-sidebar">
+          {/* MACHINE CONTROLS */}
+          <section className="h5kt-panel h5kt-controls-panel">
+            <div className="h5kt-panel-header">
+              <span>Machine Controls</span>
+              <div className="h5kt-panel-actions">
+                <button title="Minimize">_</button>
+                <button title="Maximize">□</button>
+                <button title="Close">✕</button>
+              </div>
+            </div>
+            <div className="h5kt-controls-body">
+              <button className="h5kt-ctrl-btn ctrl-grip" title="Grip / Setup">
+                <svg viewBox="0 0 36 36" className="ctrl-icon">
+                  <rect x="6" y="6" width="24" height="24" rx="2" fill="#555" stroke="#888" strokeWidth="1" />
+                  <path d="M10 18 h16 M18 10 v16" stroke="#ff8c00" strokeWidth="3" />
+                  <circle cx="18" cy="18" r="4" fill="#ff4500" />
+                </svg>
+              </button>
 
-          <div className="horizon-panel__content graph-content">
-            <GraphPanel
-              data={curve}
-              maxForce={600}
-              maxPosition={1.3}
-            />
-          </div>
-        </section>
+              <button className="h5kt-ctrl-btn" title="Fast Up">
+                <svg viewBox="0 0 36 36" className="ctrl-icon">
+                  <path d="M18 6 L28 20 H8 Z" fill="url(#grad-orange)" />
+                  <path d="M18 16 L28 30 H8 Z" fill="url(#grad-orange)" />
+                  <defs>
+                    <linearGradient id="grad-orange" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#ffa500" />
+                      <stop offset="100%" stopColor="#ff4500" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </button>
+
+              <button className="h5kt-ctrl-btn" title="Up">
+                <svg viewBox="0 0 36 36" className="ctrl-icon">
+                  <path d="M18 8 L30 26 H6 Z" fill="url(#grad-orange)" />
+                </svg>
+              </button>
+
+              <button className="h5kt-ctrl-btn" title="Return">
+                <svg viewBox="0 0 36 36" className="ctrl-icon">
+                  <circle cx="18" cy="18" r="10" fill="none" stroke="#ff8c00" strokeWidth="3" />
+                  <path d="M18 10 L24 18 H12 Z" fill="#ff8c00" />
+                </svg>
+              </button>
+
+              <button className="h5kt-ctrl-btn" title="Fine Adjust">
+                <svg viewBox="0 0 36 36" className="ctrl-icon">
+                  <path d="M18 28 L6 10 H30 Z" fill="url(#grad-orange)" />
+                </svg>
+              </button>
+
+              <button className="h5kt-ctrl-btn ctrl-stop" title="Emergency Stop">
+                <span className="ctrl-stop-x">X</span>
+              </button>
+
+              <button className="h5kt-ctrl-btn" title="Home">
+                <svg viewBox="0 0 36 36" className="ctrl-icon">
+                  <path d="M8 28 V16 L18 8 L28 16 V28 H20 V20 H16 V28 Z" fill="url(#grad-orange)" />
+                </svg>
+              </button>
+            </div>
+          </section>
+
+          {/* LIVE DATA */}
+          <section className="h5kt-panel h5kt-live-panel">
+            <div className="h5kt-panel-header">
+              <span>Live Data</span>
+              <div className="h5kt-panel-actions">
+                <button title="Minimize">_</button>
+                <button title="Close">✕</button>
+              </div>
+            </div>
+            <div className="h5kt-live-data">
+              <div className="h5kt-live-row">
+                <span className="h5kt-live-label">Force</span>
+                <input type="text" readOnly value={liveData.force.toFixed(0)} />
+                <span className="h5kt-live-unit">lbf</span>
+                <button className="h5kt-live-btn">🔒</button>
+                <button className="h5kt-live-btn">0</button>
+              </div>
+
+              <div className="h5kt-live-row">
+                <span className="h5kt-live-label">Position</span>
+                <input type="text" readOnly value={liveData.position.toFixed(3)} />
+                <span className="h5kt-live-unit">in</span>
+                <button className="h5kt-live-btn">🔒</button>
+                <button className="h5kt-live-btn">0</button>
+              </div>
+
+              <div className="h5kt-live-row">
+                <span className="h5kt-live-label">Stress</span>
+                <input type="text" readOnly value="0" />
+                <span className="h5kt-live-unit">psi</span>
+              </div>
+
+              <div className="h5kt-live-row">
+                <span className="h5kt-live-label">Offset</span>
+                <input type="text" readOnly value="0" />
+                <span className="h5kt-live-unit">%</span>
+              </div>
+
+              <div className="h5kt-live-row">
+                <span className="h5kt-live-label">Modulus</span>
+                <input type="text" readOnly value="0.0" />
+                <span className="h5kt-live-unit">Mpsi</span>
+              </div>
+
+              <div className="h5kt-live-row">
+                <span className="h5kt-live-label">Time</span>
+                <input type="text" readOnly value={liveData.time.toFixed(0)} />
+                <span className="h5kt-live-unit">s</span>
+              </div>
+
+              <div className="h5kt-live-row">
+                <span className="h5kt-live-label">Position Rate</span>
+                <input type="text" readOnly value={liveData.positionRate.toFixed(0)} />
+                <span className="h5kt-live-unit">in/min</span>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
 
-      {/* LIVE DATA */}
-      <section className="horizon-panel live-panel">
-        <div className="horizon-panel__title">
-          LIVE DATA
+      {/* BOTTOM RESULTS AREA */}
+      <section className="h5kt-panel h5kt-results">
+        <div className="h5kt-results__toolbar">
+          <span className="h5kt-results__title">Testing - Single Mode</span>
+          <div className="h5kt-results__tools">
+            <button>🖨 Print</button>
+            <button>🔄 Regenerate</button>
+            <button>➕ Add ▾</button>
+            <button>💬 Comments</button>
+            <button>🧹 Clear Completed ▾</button>
+            <button>📈 Curve Overlay ▾</button>
+            <button>📋 Specified Results Shown ▾</button>
+          </div>
         </div>
 
-        <div className="live-panel__content">
-          <LiveDataStrip data={liveData} />
-        </div>
-      </section>
-
-      {/* SPECIMENS */}
-      <section className="horizon-panel specimen-panel">
-        <div className="horizon-panel__title">
-          SPECIMEN / RESULT
-        </div>
-
-        <div className="specimen-panel__content">
+        <div className="h5kt-results__table-wrapper">
           <SpecimenTable specimens={specimens} />
         </div>
       </section>

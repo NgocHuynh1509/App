@@ -23,160 +23,48 @@
   height: 100%;
   min-height: 0;
 }
-/* =========================================================
-   FIX LỖI TRÀN ĐỒ THỊ (SVG / GRAPH CONTAINER)
-   ========================================================= */
 
-/* Giới hạn khung chứa đồ thị */
-.mp1200-tab__graph .industrial-panel__body,
-.workspace__graph,
-.test-preview-graph,
-div[class*="graph"],
-div[class*="chart"] {
-  position: relative !important;
-  width: 100% !important;
-  height: 100% !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-/* Ép SVG luôn nằm gọn 100% bên trong khung */
-.mp1200-tab__graph svg,
-.workspace__graph svg,
-.test-preview-graph svg,
-svg {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  object-fit: contain !important;
-  overflow: hidden !important;
-}
-
-/* =========================================================
-   TINIUS OLSEN HORIZON - EXACT COLOR PALETTE & STYLE
-   ========================================================= */
 
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
-body, html, #root, .app {
+html,
+body,
+#root {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: #b0b5b3 !important; /* Màu xám công nghiệp */
-  color: #000000 !important;
-  font-family: "Tahoma", "Segoe UI", sans-serif !important;
-  font-size: 11px !important;
+  background: #0e100d;
 }
 
-/* 1. Header trên cùng (Test & Recall, Method Editor...) */
-.title-bar, header, div[class*="TitleBar"] {
-  background: linear-gradient(180deg, #1f251f 0%, #111411 100%) !important;
-  border-bottom: 2px solid #3a453a !important;
+.app__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  overflow: hidden;
 }
 
-/* Nút tab Active trên Header */
-button[aria-selected="true"], .tab--active, .toolbar-button--active {
-  background: linear-gradient(180deg, #99ca00 0%, #759a00 100%) !important;
-  color: #000000 !important;
-  font-weight: bold !important;
-  border: 1px solid #4d6600 !important;
+.app__content {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-/* 2. Thanh Toolbar chứa nút START, PAUSE, STOP */
-.test-recall-toolbar, .industrial-toolbar, div[class*="toolbar"] {
-  background-color: #c0c5c3 !important;
-  border-bottom: 1px solid #909593 !important;
-  padding: 4px 8px !important;
+.app__dock-reopen {
+  flex: 0 0 16px;
+  appearance: none;
+  border: none;
+  border-right: 2px solid #2c2f28;
+  background: linear-gradient(180deg, #14170f 0%, #0a0c08 100%);
+  color: #9be03a;
+  font-size: 10px;
+  cursor: pointer;
+  writing-mode: vertical-rl;
 }
 
-/* Các nút bấm chuẩn Win Classic */
-button, .industrial-btn, .toolbar-button {
-  background: linear-gradient(180deg, #ffffff 0%, #d6d6d6 100%) !important;
-  color: #000000 !important;
-  border: 1px solid #707070 !important;
-  border-radius: 2px !important;
-  padding: 3px 10px !important;
-  font-weight: bold !important;
-  box-shadow: inset 1px 1px 0px #ffffff, 1px 1px 2px rgba(0,0,0,0.2) !important;
-}
-
-button:active {
-  background: #c0c0c0 !important;
-  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.4) !important;
-}
-
-/* 3. Khung hiển thị thông số LCD (Force / Position) */
-.mp1200-readout, 
-div[class*="readout"], 
-div[class*="LiveData"], 
-div[class*="MachineControl"] div[class*="value"] {
-  background-color: #000000 !important;
-  border: 2px inset #666666 !important;
-  border-radius: 0px !important;
-}
-
-/* Chữ số LED màu xanh lá huỳnh quang */
-.mp1200-readout__value, 
-span[class*="value"], 
-div[class*="value"] {
-  color: #02742f !important;
-  font-family: "Consolas", "Courier New", monospace !important;
-  font-weight: bold !important;
-}
-
-/* 4. Khung Đồ Thị (GRAPH) */
-.workspace__graph, .mp1200-tab__graph, div[class*="Graph"] {
-  background-color: #ffffff !important;
-  border: 1px solid #808080 !important;
-}
-
-/* 5. Khung tiêu đề Panel (GRAPH, LIVE DATA, SPECIMEN) */
-.panel-caption, .industrial-panel__header {
-  background: linear-gradient(180deg, #444c44 0%, #293029 100%) !important;
-  color: #ffffff !important;
-  font-weight: bold !important;
-  font-size: 11px !important;
-  text-transform: uppercase !important;
-  border-bottom: 1px solid #1a1f1a !important;
-  padding: 4px 8px !important;
-}
-
-/* 6. Bảng dữ liệu Specimen / Results */
-table, .recall-table {
-  background-color: #ffffff !important;
-  border: 1px solid #808080 !important;
-  color: #000000 !important;
-}
-
-th {
-  background: linear-gradient(180deg, #e6e6e6 0%, #d0d0d0 100%) !important;
-  color: #000000 !important;
-  border-right: 1px solid #b0b0b0 !important;
-  border-bottom: 1px solid #808080 !important;
-  font-weight: bold !important;
-  padding: 4px 6px !important;
-}
-
-td {
-  border-right: 1px solid #e0e0e0 !important;
-  border-bottom: 1px solid #e0e0e0 !important;
-  padding: 4px 6px !important;
-  color: #000000 !important;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f5f3 !important;
-}
-
-tr:hover {
-  background-color: #000080 !important;
-  color: #ffffff !important;
+.app__dock-reopen:hover {
+  background: #1c2018;
 }

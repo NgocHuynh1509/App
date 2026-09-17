@@ -1,435 +1,280 @@
 .h5kt-tab {
   width: 100%;
   height: 100%;
-  min-height: 0;
-
   display: flex;
   flex-direction: column;
-  gap: 5px;
-
-  background: #d4d4d4;
-
-  font-family: Tahoma, Arial, sans-serif;
+  gap: 4px;
+  padding: 4px;
+  background: #1b1c18;
+  color: #dcdcdc;
+  font-family: "Segoe UI", Arial, sans-serif;
   font-size: 11px;
-
   box-sizing: border-box;
-}
-
-/* =========================
-   TOOLBAR
-========================= */
-
-.horizon-toolbar {
-  height: 34px;
-
-  display: flex;
-  align-items: center;
-
-  padding: 3px 5px;
-
-  background: #c7c7c7;
-
-  border: 1px solid #808080;
-  border-top-color: #f5f5f5;
-  border-left-color: #f5f5f5;
-
-  box-sizing: border-box;
-}
-
-.toolbar-group {
-  display: flex;
-  gap: 3px;
-}
-
-.toolbar-separator {
-  width: 1px;
-  height: 24px;
-
-  margin: 0 6px;
-
-  background: #888;
-  border-right: 1px solid #eee;
-}
-
-.toolbar-spacer {
-  flex: 1;
-}
-
-.horizon-button {
-  min-width: 70px;
-  height: 25px;
-
-  padding: 2px 9px;
-
-  background: #e9e9e9;
-
-  border: 1px solid #777;
-  border-top-color: #fff;
-  border-left-color: #fff;
-
-  color: #111;
-
-  font-family: Tahoma, Arial, sans-serif;
-  font-size: 11px;
-
-  cursor: pointer;
-}
-
-.horizon-button:hover {
-  background: #f5f5f5;
-}
-
-.horizon-button:active {
-  border-top-color: #555;
-  border-left-color: #555;
-  border-right-color: #fff;
-  border-bottom-color: #fff;
-
-  background: #d0d0d0;
-}
-
-.horizon-button--green {
-  color: #075d16;
-}
-
-.horizon-button--red {
-  color: #8b0000;
-}
-
-.machine-status {
-  height: 22px;
-
-  display: flex;
-  align-items: center;
-  gap: 5px;
-
-  padding: 0 8px;
-
-  border: 1px solid #999;
-
-  background: #dedede;
-
-  color: #222;
-
-  font-size: 10px;
-}
-
-.machine-status__lamp {
-  width: 8px;
-  height: 8px;
-
-  border-radius: 50%;
-
-  background: #24a148;
-
-  border: 1px solid #155d25;
-}
-
-/* =========================
-   MAIN AREA
-========================= */
-
-.h5kt-main {
-  flex: 1;
-  min-height: 0;
-
-  display: grid;
-
-  grid-template-columns: 245px minmax(0, 1fr);
-
-  gap: 5px;
-}
-
-/* =========================
-   PANEL
-========================= */
-
-.horizon-panel {
-  min-height: 0;
-
-  display: flex;
-  flex-direction: column;
-
-  background: #dedede;
-
-  border: 1px solid #707070;
-}
-
-.horizon-panel__title {
-  height: 24px;
-
-  display: flex;
-  align-items: center;
-
-  padding: 0 7px;
-
-  box-sizing: border-box;
-
-  background: linear-gradient(
-    to bottom,
-    #6c7884 0%,
-    #4e5964 48%,
-    #404951 100%
-  );
-
-  color: #fff;
-
-  border-bottom: 1px solid #303030;
-
-  font-size: 10px;
-  font-weight: bold;
-  letter-spacing: 0.2px;
-}
-
-.horizon-panel__content {
-  flex: 1;
-  min-height: 0;
-
-  padding: 5px;
-
-  box-sizing: border-box;
-}
-
-/* =========================
-   MACHINE
-========================= */
-
-.h5kt-machine {
   overflow: hidden;
 }
 
-.machine-name {
-  margin-bottom: 7px;
-
-  padding: 5px;
-
-  background: #c8c8c8;
-
-  border: 1px solid #929292;
-}
-
-.machine-name__label {
-  font-size: 9px;
-  color: #555;
-}
-
-.machine-name__value {
-  margin-top: 2px;
-
-  font-weight: bold;
-  color: #111;
-}
-
-/* =========================
-   MACHINE SECTION
-========================= */
-
-.machine-section {
-  margin-bottom: 6px;
-
-  border: 1px solid #999;
-
-  background: #d5d5d5;
-}
-
-.machine-section__title {
-  padding: 3px 5px;
-
-  background: #c1c1c1;
-
-  border-bottom: 1px solid #aaa;
-
-  font-weight: bold;
-}
-
-/* =========================
-   DIGITAL DISPLAY
-========================= */
-
-.digital-display {
-  height: 35px;
-
+/* MACHINE STATUS BAR */
+.h5kt-status-line {
+  flex: 0 0 24px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  gap: 8px;
+  padding: 0 8px;
+  background: #23261f;
+  border: 1px solid #33372c;
+  font-size: 11px;
+}
 
-  gap: 5px;
+.h5kt-status-badge {
+  color: #e5c158;
+  font-weight: bold;
+}
 
-  padding: 0 6px;
+.h5kt-status-spacer {
+  flex: 1;
+}
 
-  background: #111;
+.h5kt-btn-dropdown {
+  background: linear-gradient(180deg, #3d4234 0%, #20231b 100%);
+  border: 1px solid #4a503f;
+  color: #ddd;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 2px;
+  cursor: pointer;
+}
 
-  color: #00ff55;
+/* MAIN TOP WORKSPACE LAYOUT */
+.h5kt-top-content {
+  flex: 1 1 55%;
+  display: flex;
+  gap: 4px;
+  min-height: 0;
+  overflow: hidden;
+}
 
-  font-family: "Courier New", monospace;
+/* GRAPH PANEL */
+.h5kt-graph-panel {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
 
-  border: 2px inset #999;
+.h5kt-graph-content {
+  flex: 1;
+  min-height: 0;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
 
+.h5kt-graph-content > * {
+  width: 100% !important;
+  height: 100% !important;
   box-sizing: border-box;
 }
 
-.digital-display span {
-  font-size: 17px;
-  font-weight: bold;
-}
-
-.digital-display small {
-  color: #80ff9f;
-  font-size: 9px;
-}
-
-/* =========================
-   JOG
-========================= */
-
-.jog-control {
-  height: 100px;
-
+/* RIGHT SIDEBAR */
+.h5kt-right-sidebar {
+  flex: 0 0 310px;
   display: flex;
   flex-direction: column;
+  gap: 4px;
+  min-height: 0;
+}
 
+/* COMMON PANEL STYLES */
+.h5kt-panel {
+  background: #141612;
+  border: 1px solid #2d3126;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.h5kt-panel-header {
+  flex: 0 0 20px;
+  background: linear-gradient(180deg, #2f3427 0%, #1a1d15 100%);
+  border-bottom: 1px solid #2d3126;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  font-weight: bold;
+  font-size: 11px;
+  color: #e2e8d8;
+}
+
+.h5kt-panel-actions button {
+  width: 14px;
+  height: 14px;
+  background: transparent;
+  border: none;
+  color: #8a947d;
+  font-size: 10px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.h5kt-panel-actions button:hover {
+  color: #fff;
+}
+
+/* MACHINE CONTROLS PANEL */
+.h5kt-controls-panel {
+  flex: 0 0 auto;
+}
+
+.h5kt-controls-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  padding: 4px;
+  background: #181a16;
+  border-top: 1px solid #2a2d24;
+}
+
+/* METALLIC BUTTONS */
+.h5kt-ctrl-btn {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  height: 100%;
+  min-height: 38px;
+  background: linear-gradient(180deg, #e6e6e6 0%, #cacaca 45%, #a1a1a1 50%, #d8d8d8 100%);
+  border: 1px solid #555;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
   align-items: center;
   justify-content: center;
-
-  gap: 4px;
+  padding: 3px;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-.jog-control button {
-  width: 28px;
-  height: 22px;
-
-  background: #e8e8e8;
-
-  border: 1px solid #777;
-  border-top-color: #fff;
-  border-left-color: #fff;
-
-  cursor: pointer;
+.h5kt-ctrl-btn:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #dfdfdf 45%, #b5b5b5 50%, #ececec 100%);
 }
 
-.jog-track {
-  position: relative;
-
-  width: 22px;
-  height: 42px;
-
-  background: #444;
-
-  border: 1px solid #222;
+.h5kt-ctrl-btn:active {
+  background: linear-gradient(180deg, #999 0%, #bbb 100%);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-.jog-indicator {
-  position: absolute;
-
-  left: 2px;
-  right: 2px;
-
-  top: 15px;
-
-  height: 10px;
-
-  background: #d7d7d7;
-
-  border: 1px solid #777;
+.ctrl-icon {
+  width: 100%;
+  height: 100%;
+  max-width: 26px;
+  max-height: 26px;
+  filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
 }
 
-/* =========================
-   SPEED
-========================= */
+.ctrl-stop-x {
+  font-family: "Arial Black", "Impact", sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: #cc0000;
+  text-shadow: 0px 1px 0px #fff, 0px -1px 0px #800000;
+  line-height: 1;
+}
 
-.speed-row {
+/* LIVE DATA PANEL */
+.h5kt-live-panel {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.h5kt-live-data {
+  flex: 1;
   display: flex;
-  justify-content: space-between;
-
-  padding: 4px 6px;
-
-  border-bottom: 1px solid #aaa;
+  flex-direction: column;
+  gap: 3px;
+  padding: 4px;
+  background: #11130f;
+  overflow-y: auto;
 }
 
-.speed-row:last-child {
-  border-bottom: none;
+.h5kt-live-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #1a1d17;
+  border: 1px solid #292e22;
+  padding: 2px 4px;
+  height: 24px;
+  box-sizing: border-box;
 }
 
-.speed-row strong {
-  font-family: "Courier New", monospace;
+.h5kt-live-label {
+  width: 85px;
+  font-size: 10px;
+  color: #a1aa95;
+  white-space: nowrap;
 }
 
-/* =========================
-   JOG BUTTONS
-========================= */
-
-.machine-jog-buttons {
-  display: grid;
-
-  grid-template-columns: repeat(5, 1fr);
-
-  gap: 2px;
-
-  margin-top: auto;
-}
-
-.machine-jog-buttons button {
-  height: 25px;
-
-  background: #e7e7e7;
-
-  border: 1px solid #777;
-  border-top-color: #fff;
-  border-left-color: #fff;
-
-  cursor: pointer;
-}
-
-/* =========================
-   GRAPH
-========================= */
-
-.h5kt-graph {
+.h5kt-live-row input {
+  flex: 1;
   min-width: 0;
+  height: 18px;
+  background: #000;
+  border: 1px solid #33392a;
+  color: #79f82e;
+  font-family: "Consolas", monospace;
+  font-size: 11px;
+  font-weight: bold;
+  text-align: right;
+  padding: 0 4px;
 }
 
-.graph-content {
+.h5kt-live-unit {
+  width: 35px;
+  font-size: 9px;
+  color: #6a7360;
+}
+
+.h5kt-live-btn {
+  width: 16px;
+  height: 16px;
+  font-size: 8px;
   padding: 0;
-
-  background: #fff;
-
-  overflow: hidden;
+  background: #272d20;
+  border: 1px solid #3d4533;
+  color: #aaa;
+  cursor: pointer;
+  border-radius: 2px;
 }
 
-/* =========================
-   LIVE DATA
-========================= */
-
-.live-panel {
-  flex-shrink: 0;
-
-  height: 72px;
+/* RESULTS TOOLBAR DÀNH CHO H5KTTAB.CSS */
+.h5kt-results__toolbar {
+  flex: 0 0 28px !important;
+  background: linear-gradient(180deg, #4d5243 0%, #292d23 100%) !important;
+  border-bottom: 1px solid #383e2e !important;
+  padding: 0 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
 }
 
-.live-panel__content {
-  flex: 1;
-  min-height: 0;
-
-  padding: 0;
-
-  overflow: hidden;
+.h5kt-results__tools {
+  display: flex !important;
+  gap: 4px !important;
+  align-items: center !important;
 }
 
-/* =========================
-   SPECIMEN
-========================= */
-
-.specimen-panel {
-  flex-shrink: 0;
-
-  height: 150px;
+.h5kt-results__tools button {
+  background: linear-gradient(180deg, #3d4334 0%, #20241b 100%) !important;
+  border: 1px solid #505744 !important;
+  color: #e5ecd8 !important;
+  font-size: 10px !important;
+  padding: 2px 8px !important;
+  border-radius: 2px !important;
+  cursor: pointer !important;
 }
 
-.specimen-panel__content {
-  flex: 1;
-  min-height: 0;
-
-  padding: 0;
-
-  overflow: auto;
+.h5kt-results__tools button:hover {
+  background: #4a523f !important;
 }

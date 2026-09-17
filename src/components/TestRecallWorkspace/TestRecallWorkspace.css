@@ -6,125 +6,83 @@
   display: flex;
   flex-direction: column;
 
-  background: #d0d0d0;
+  background: #1a1d16;
 
-  border: 1px solid #666;
+  font-family: "Segoe UI", "Inter", Arial, sans-serif;
 
   box-sizing: border-box;
 
-  font-family: Tahoma, Arial, sans-serif;
+  overflow: hidden;
 }
 
-/* =========================
-   MAIN TABS
-========================= */
+
+/* =========================================================
+   TEST & RECALL SUB TABS
+========================================================= */
 
 .tr-workspace__tabs {
-  height: 29px;
+  flex-shrink: 0;
 
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 
-  padding: 0 4px;
+  gap: 3px;
 
-  gap: 2px;
+  padding: 4px 6px;
 
-  background: #bcbcbc;
+  background: #0e100c;
 
-  border-bottom: 1px solid #666;
+  border-bottom: 1px solid #2c2f28;
 
   box-sizing: border-box;
 }
 
 .tr-workspace__tab {
-  height: 26px;
-
   min-width: 90px;
 
-  padding: 3px 15px;
+  appearance: none;
+  border: 1px solid #3a3f34;
 
-  background: #cfcfcf;
+  background: #1c2018;
 
-  color: #222;
+  color: #cfd6c4;
 
-  border: 1px solid #777;
-  border-bottom: none;
+  font-size: 10.5px;
 
-  font-family: Tahoma, Arial, sans-serif;
-  font-size: 11px;
+  padding: 5px 14px;
+
+  border-radius: 3px 3px 0 0;
 
   cursor: pointer;
 }
 
 .tr-workspace__tab:hover {
-  background: #e5e5e5;
+  background: #2a3021;
 }
 
 .tr-workspace__tab--active {
-  position: relative;
-
-  height: 27px;
-
-  background: #d4d4d4;
-
-  color: #111;
-
-  font-weight: bold;
-
-  border-top: 2px solid #496b89;
+  background: linear-gradient(180deg, #2c3320 0%, #1a1d14 100%);
+  border-color: #cbe86a;
+  box-shadow: 0 0 0 1px #cbe86a inset;
+  color: #ecf2df;
+  font-weight: 600;
 }
 
-/* =========================
+
+/* =========================================================
    CONTENT
-========================= */
+========================================================= */
 
 .tr-workspace__content {
   flex: 1;
+
   min-height: 0;
 
-  padding: 5px;
+  padding: 4px;
 
-  background: #d4d4d4;
+  background: #1a1d16;
 
   overflow: hidden;
 
   box-sizing: border-box;
-}
-
-/* =========================
-   COMMON HORIZON PANEL
-========================= */
-
-.industrial-panel {
-  background: #dedede;
-
-  border: 1px solid #707070;
-
-  display: flex;
-  flex-direction: column;
-
-  min-height: 0;
-}
-
-.industrial-panel__header {
-  height: 24px;
-
-  display: flex;
-  align-items: center;
-
-  padding: 0 7px;
-
-  background: linear-gradient(
-    to bottom,
-    #6c7884,
-    #48535e
-  );
-
-  color: #fff;
-
-  border-bottom: 1px solid #303030;
-
-  font-family: Tahoma, Arial, sans-serif;
-  font-size: 10px;
-  font-weight: bold;
 }

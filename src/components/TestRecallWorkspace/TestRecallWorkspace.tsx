@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import H5kTTab from "./H5kTTab";
 import MP1200Tab from "./MP1200Tab";
 import RecallTab from "./RecallTab";
@@ -32,32 +32,37 @@ const SPECIMENS: Specimen[] = [
 
 function buildCurve(): GraphPoint[] {
   const points: GraphPoint[] = [];
-  for (let i = 0; i <= 60; i++) {
-    const position = (i / 60) * 1.3;
-    const force = -540 * (1 - Math.exp(-position * 3));
-    points.push({ position, force: Math.abs(force) });
+  const totalPoints = 100;
+
+  for (let i = 0; i <= totalPoints; i++) {
+    // 1. Cho position chạy từ 0 đến 0.13 (khớp hoàn toàn với maxPosition của GraphPanel)
+    const position = (i / totalPoints) * 0.13; 
+
+    // 2. Tăng lực max lên khoảng 6500 - 7000 lbf (vừa vặn đẹp với maxForce 7500)
+    // Dùng Math.sin để tạo độ vồng cao vút
+    const baseForce = 7000 * Math.sin((position / 0.13) * Math.PI * 0.85);
+    
+    // Thêm một chút nhiễu nhẹ
+    const noise = (Math.random() - 0.5) * 30;
+    const force = Math.max(0, baseForce + noise);
+
+    points.push({
+      position: Number(position.toFixed(4)),
+      force: Number(force.toFixed(2)),
+    });
   }
+
   return points;
 }
 
-export default function TestRecallWorkspace() {
+interface Props {
+  liveData: LiveData;
+}
+
+export default function TestRecallWorkspace({ liveData }: Props) {
   const [activeTab, setActiveTab] = useState<SubTab>("H5kT");
 
-  const [liveData, setLiveData] = useState<LiveData>({
-    force: -543.48,
-    position: -0.006,
-    time: 0,
-    positionRate: 18,
-  });
-
   const curve = useMemo(() => buildCurve(), []);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setLiveData((prev) => ({ ...prev, time: prev.time + 1 }));
-    }, 1000);
-    return () => clearInterval(id);
-  }, []);
 
   return (
     <div className="tr-workspace">
