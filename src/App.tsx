@@ -82,7 +82,7 @@ export default function App() {
             ) : activeTab === "result-editor" ? (
               <ResultEditor selectedResultName={currentResult} />
             ) : (
-              <TestRecallWorkspace liveData={liveData} />
+              <TestRecallWorkspace />
             )}
           </main>
         </div>
