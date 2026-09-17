@@ -5,7 +5,8 @@
   min-height: 0;
   gap: 4px;
   font-family: "Segoe UI", Arial, sans-serif;
-  color: #e4e8dc;
+  color: #ffffff;
+  background: #0f141d; /* Nền tối xanh đen HVU */
 }
 
 /* ---- Info bar: Selected Method + Load/Save/... ---- */
@@ -15,18 +16,18 @@
   align-items: center;
   gap: 6px;
   padding: 6px 10px;
-  background: linear-gradient(180deg, #23291c 0%, #14170f 100%);
-  border: 1px solid #2c2f28;
+  background: linear-gradient(180deg, #1e2636 0%, #121824 100%);
+  border: 1px solid #283243;
   border-radius: 2px;
   font-size: 11px;
 }
 
 .method-editor__infobar-label {
-  color: #9aa38a;
+  color: #90a4ae;
 }
 
 .method-editor__infobar-value {
-  color: #d9b23c;
+  color: #f4d03f; /* Điểm nhấn Vàng Kim HVU */
   font-weight: 600;
 }
 
@@ -39,9 +40,9 @@
   align-items: center;
   gap: 4px;
   appearance: none;
-  border: 1px solid #3a3f34;
-  background: #1c2018;
-  color: #cfd6c4;
+  border: 1px solid #36465e;
+  background: linear-gradient(180deg, #253144 0%, #17202e 100%);
+  color: #ffffff;
   font-size: 10px;
   padding: 4px 8px;
   border-radius: 3px;
@@ -50,7 +51,8 @@
 }
 
 .method-editor__tool:hover {
-  background: #2a3021;
+  background: #2c3a50;
+  border-color: #1976d2;
 }
 
 .method-editor__tool:disabled {
@@ -60,17 +62,17 @@
 
 .method-editor__tool-icon {
   font-size: 11px;
-  color: #9be03a;
+  color: #64b5f6; /* Xanh Dương Nổi bật */
 }
 
 .method-editor__tool-icon--danger {
-  color: #e0473a;
+  color: #e53935; /* Đỏ Cảnh Báo */
 }
 
 .method-editor__divider {
   width: 1px;
   align-self: stretch;
-  background: #3a3f34;
+  background: #283243;
   margin: 0 2px;
 }
 
@@ -80,8 +82,8 @@
   display: flex;
   gap: 4px;
   padding: 6px 8px;
-  background: #14170f;
-  border: 1px solid #2c2f28;
+  background: #121824;
+  border: 1px solid #283243;
   border-radius: 2px;
   overflow-x: auto;
 }
@@ -94,7 +96,7 @@
   appearance: none;
   border: 1px solid transparent;
   background: transparent;
-  color: #a9b39a;
+  color: #8294aa;
   font-size: 9.5px;
   padding: 5px 10px;
   border-radius: 3px;
@@ -104,12 +106,13 @@
 }
 
 .method-editor__ribbon-item:hover {
-  background: #1c2018;
+  background: #1c2433;
+  color: #ffffff;
 }
 
 .method-editor__ribbon-icon {
   font-size: 15px;
-  color: #9be03a;
+  color: #64b5f6;
 }
 
 .method-editor__ribbon-label {
@@ -118,15 +121,16 @@
   line-height: 1.15;
 }
 
+/* Ribbon Item Active - Tông Đỏ Đô Thương Hiệu HVU */
 .method-editor__ribbon-item--active {
-  background: linear-gradient(180deg, #cbe86a 0%, #86b31d 100%);
-  border-color: #86b31d;
-  color: #0d1206;
+  background: linear-gradient(180deg, #b71c1c 0%, #7f1d1d 100%);
+  border-color: #f4d03f;
+  color: #ffffff;
   font-weight: 600;
 }
 
 .method-editor__ribbon-item--active .method-editor__ribbon-icon {
-  color: #0d1206;
+  color: #ffffff;
 }
 
 /* ---- Trang cuộn chứa tất cả section ---- */
@@ -142,8 +146,8 @@
 
 .method-editor__section {
   flex: 0 0 auto;
-  background: #101210;
-  border: 1px solid #2c2f28;
+  background: #161b26;
+  border: 1px solid #283243;
   border-radius: 2px;
   padding: 10px 12px;
   scroll-margin-top: 6px;
@@ -152,14 +156,14 @@
 .method-editor__section-title {
   margin: 0 0 8px;
   font-size: 12px;
-  color: #cbe86a;
+  color: #ffffff;
   font-weight: 600;
-  border-bottom: 1px solid #2c2f28;
+  border-bottom: 2px solid #1976d2; /* Viền xanh dương điểm nhấn */
   padding-bottom: 6px;
 }
 
 .method-editor__hint {
-  color: #6b7362;
+  color: #90a4ae;
   font-size: 11px;
   margin: 0;
 }
@@ -175,7 +179,7 @@
   flex-direction: column;
   gap: 3px;
   font-size: 10.5px;
-  color: #cfd6c4;
+  color: #d0d7de;
   min-width: 160px;
 }
 
@@ -186,12 +190,19 @@
 .method-editor__field-grid input,
 .method-editor__field-grid textarea,
 .method-editor__field-grid select {
-  background: #0e100d;
-  border: 1px solid #3a3f34;
-  color: #e4e8dc;
+  background: #0a0d14;
+  border: 1px solid #283243;
+  color: #64b5f6;
   font-size: 10.5px;
   padding: 4px 6px;
   border-radius: 3px;
+}
+
+.method-editor__field-grid input:focus,
+.method-editor__field-grid textarea:focus,
+.method-editor__field-grid select:focus {
+  border-color: #1976d2;
+  outline: none;
 }
 
 .method-editor__mini-table {
@@ -202,16 +213,17 @@
 
 .method-editor__mini-table th {
   text-align: left;
-  color: #a9b39a;
+  color: #ffffff;
+  background: #121824;
   font-weight: 600;
-  padding: 4px 8px;
-  border-bottom: 1px solid #2c2f28;
+  padding: 5px 8px;
+  border-bottom: 2px solid #1976d2;
 }
 
 .method-editor__mini-table td {
   padding: 4px 8px;
-  border-bottom: 1px solid #1a1d16;
-  color: #e4e8dc;
+  border-bottom: 1px solid #1f2838;
+  color: #ffffff;
 }
 
 /* ---- Control Segments ---- */
@@ -228,10 +240,10 @@
   grid-template-columns: 50px 34px 1.2fr 1.2fr 1.4fr 1fr 1.6fr 1fr;
   gap: 8px;
   font-size: 10px;
-  color: #a9b39a;
+  color: #90a4ae;
   font-weight: 600;
   padding: 4px 8px;
-  border-bottom: 1px solid #2c2f28;
+  border-bottom: 1px solid #283243;
 }
 
 .method-editor__seg-list {
@@ -242,16 +254,16 @@
 }
 
 .method-editor__seg {
-  border: 1px solid #2c2f28;
+  border: 1px solid #283243;
   border-left: 3px solid transparent;
   border-radius: 2px;
-  background: #14170f;
+  background: #121824;
   cursor: pointer;
 }
 
 .method-editor__seg--selected {
-  border-left-color: #d9b23c;
-  background: #1a1a10;
+  border-left-color: #b71c1c; /* Đỏ Đô được chọn */
+  background: #1a2433;
 }
 
 .method-editor__seg-row {
@@ -263,7 +275,7 @@
 }
 
 .method-editor__seg-num {
-  color: #cfd6c4;
+  color: #ffffff;
   font-size: 11px;
   font-weight: 600;
   text-align: center;
@@ -271,9 +283,9 @@
 
 .method-editor__seg-toggle {
   appearance: none;
-  border: 1px solid #3a3f34;
-  background: #1c2018;
-  color: #9be03a;
+  border: 1px solid #36465e;
+  background: #17202e;
+  color: #64b5f6;
   font-size: 9px;
   width: 22px;
   height: 22px;
@@ -284,9 +296,9 @@
 .method-editor__seg-row select,
 .method-editor__seg-row input {
   width: 100%;
-  background: #0e100d;
-  border: 1px solid #3a3f34;
-  color: #e4e8dc;
+  background: #0a0d14;
+  border: 1px solid #283243;
+  color: #64b5f6;
   font-size: 10.5px;
   padding: 4px 6px;
   border-radius: 3px;
@@ -300,6 +312,7 @@
 
 .method-editor__seg-value-icon {
   font-size: 11px;
+  color: #64b5f6;
 }
 
 /* ---- Panel mở rộng ---- */
@@ -312,10 +325,10 @@
 
 .method-editor__box {
   flex: 1 1 260px;
-  border: 1px solid #2c2f28;
+  border: 1px solid #283243;
   border-radius: 3px;
   padding: 8px 10px 10px;
-  background: #101210;
+  background: #161b26;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -328,7 +341,7 @@
 .method-editor__box legend {
   padding: 0 4px;
   font-size: 10.5px;
-  color: #cbe86a;
+  color: #64b5f6;
   font-weight: 600;
 }
 
@@ -338,7 +351,7 @@
   align-items: center;
   gap: 6px;
   font-size: 10.5px;
-  color: #cfd6c4;
+  color: #d0d7de;
 }
 
 .method-editor__inline-field {
@@ -346,15 +359,15 @@
   align-items: center;
   gap: 6px;
   font-size: 10.5px;
-  color: #cfd6c4;
+  color: #d0d7de;
 }
 
 .method-editor__inline-field input,
 .method-editor__inline-field select {
   flex: 1 1 auto;
-  background: #0e100d;
-  border: 1px solid #3a3f34;
-  color: #e4e8dc;
+  background: #0a0d14;
+  border: 1px solid #283243;
+  color: #64b5f6;
   font-size: 10.5px;
   padding: 3px 6px;
   border-radius: 3px;
@@ -365,7 +378,7 @@
   flex-direction: column;
   gap: 6px;
   padding-left: 18px;
-  border-left: 1px solid #2c2f28;
+  border-left: 1px solid #283243;
   margin-left: 4px;
 }
 
@@ -373,7 +386,7 @@
   flex: 0 0 auto;
   text-align: center;
   padding: 4px;
-  color: #3a3f34;
+  color: #3a4659;
   font-size: 10px;
   letter-spacing: 0.5px;
 }

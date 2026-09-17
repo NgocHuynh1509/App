@@ -2,54 +2,67 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 30px;
-  flex: 0 0 30px;
-  padding: 0 10px;
-  background: linear-gradient(180deg, #1c1f1a 0%, #0e100d 100%);
-  border-bottom: 1px solid #333;
+  height: 40px; /* Tăng nhẹ độ rộng/cao từ 32px lên 40px */
+  flex: 0 0 40px;
+  padding: 0 12px;
+  background: linear-gradient(180deg, #f1f1f4 0%, #f6f6fa 100%);
+  border-bottom: 2px solid #f4d03f;
+  box-sizing: border-box;
 }
 
 .title-bar__brand {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
-.title-bar__dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #d9e86a, #7cb305);
-  box-shadow: 0 0 4px rgba(151, 199, 15, 0.7);
+/* Định dạng logo nhỏ gọn, căn giữa khung */
+.title-bar__logo {
+  height: 26px; /* Giữ logo nhỏ nhắn, vừa vặn trong khung 40px */
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.4));
 }
 
 .title-bar__name {
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #032761;
   letter-spacing: 0.03em;
-  color: #cfd6c4;
 }
 
+.title-bar__divider {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 11px;
+}
+
+.title-bar__app-name {
+  font-size: 12px;
+  color: #b00505;
+  font-weight: 500;
+}
+
+/* Nút điều khiển cửa sổ */
 .title-bar__window-controls {
   display: flex;
-  gap: 6px;
+  gap: 8px;
+  align-items: center;
 }
 
 .title-bar__btn {
-  width: 11px;
-  height: 11px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.4);
   cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s;
 }
 
-.title-bar__btn--minimize {
-  background: #e8c93a;
+.title-bar__btn:hover {
+  opacity: 0.8;
 }
 
-.title-bar__btn--maximize {
-  background: #6bbf3d;
-}
-
-.title-bar__btn--close {
-  background: #d9503c;
-}
+.title-bar__btn--minimize { background: #f1c40f; }
+.title-bar__btn--maximize { background: #2ecc71; }
+.title-bar__btn--close { background: #fb0e1d; }

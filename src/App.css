@@ -1,11 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #0a0d14; /* Nền tối tổng thể xanh đen HVU */
+}
+
 .app {
   display: flex;
   flex-direction: column;
   width: 100vw;
   height: 100vh;
-  background: #1a1c17;
-  color: #e4e8dc;
+  background: #0f141d; /* Nền ứng dụng chính */
+  color: #ffffff;
   font-family: "Segoe UI", "Inter", Arial, sans-serif;
+  overflow: hidden;
+}
+
+.app__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.app__content {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
 }
 
@@ -24,47 +52,21 @@
   min-height: 0;
 }
 
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body,
-#root {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  background: #0e100d;
-}
-
-.app__body {
-  flex: 1 1 auto;
-  min-height: 0;
-  display: flex;
-  overflow: hidden;
-}
-
-.app__content {
-  flex: 1 1 auto;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
+/* Nút mở lại Dock ở cạnh màn hình (Accent Xanh Dương HVU) */
 .app__dock-reopen {
   flex: 0 0 16px;
   appearance: none;
   border: none;
-  border-right: 2px solid #2c2f28;
-  background: linear-gradient(180deg, #14170f 0%, #0a0c08 100%);
-  color: #9be03a;
+  border-right: 2px solid #283243;
+  background: linear-gradient(180deg, #121824 0%, #0a0d14 100%);
+  color: #64b5f6; /* Xanh Dương Sáng */
   font-size: 10px;
   cursor: pointer;
   writing-mode: vertical-rl;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .app__dock-reopen:hover {
-  background: #1c2018;
+  background: #1c2433;
+  color: #ffffff;
 }

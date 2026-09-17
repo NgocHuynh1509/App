@@ -1,27 +1,31 @@
 .mcp {
   position: fixed;
   width: 260px;
-  background: #14170f;
-  border: 1px solid #3a3f34;
+  background: #121824; /* Nền tối xanh đen HVU */
+  border: 1px solid #283243;
   border-radius: 4px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   z-index: 50;
   user-select: none;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #ffffff;
 }
 
 .mcp--dragging {
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.8);
   opacity: 0.96;
 }
 
+/* Header Panel: Gradient Đỏ Đô Thương Hiệu HVU */
 .mcp__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 26px;
+  height: 28px;
   padding: 0 8px;
-  background: linear-gradient(180deg, #6f8a1f 0%, #3c4d10 100%);
-  border-radius: 4px 4px 0 0;
+  background: linear-gradient(180deg, #b71c1c 0%, #7f1d1d 100%);
+  border-bottom: 1px solid #f4d03f; /* Điểm nhấn viền Vàng Kim */
+  border-radius: 3px 3px 0 0;
   cursor: grab;
 }
 
@@ -30,27 +34,30 @@
 }
 
 .mcp__title {
-  font-size: 10.5px;
-  font-weight: 600;
-  color: #101206;
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: 0.3px;
 }
 
 .mcp__close {
   appearance: none;
   border: none;
   background: transparent;
-  color: #101206;
+  color: #ffffff;
   font-size: 16px;
   line-height: 1;
   cursor: pointer;
   padding: 0 2px;
+  opacity: 0.8;
 }
 
 .mcp__close:hover {
-  color: #d9503c;
+  opacity: 1;
+  color: #f4d03f;
 }
 
 .mcp__body {
@@ -68,16 +75,23 @@
 
 .mcp__jog-label {
   font-size: 9px;
-  color: #9aa38a;
+  color: #90a4ae;
+  text-transform: uppercase;
 }
 
+/* Thanh Jog Tốc Độ: Gradient Vàng Kim -> Đỏ Đô -> Xanh Dương HVU */
 .mcp__jog-track {
   position: relative;
   width: 20px;
   height: 150px;
   border-radius: 10px;
-  background: linear-gradient(180deg, #e5e878 0%, #86b31d 45%, #3a5910 100%);
-  border: 1px solid #22261c;
+  background: linear-gradient(
+    180deg,
+    #f4d03f 0%,
+    #b71c1c 45%,
+    #1976d2 100%
+  );
+  border: 1px solid #0a0d14;
 }
 
 .mcp__jog-fill {
@@ -92,9 +106,11 @@
   top: 30%;
   width: 26px;
   height: 6px;
-  background: #101206;
+  background: #ffffff;
+  border: 1px solid #283243;
   border-radius: 3px;
   transform: translate(-50%, -50%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .mcp__readouts {
@@ -107,21 +123,21 @@
 .mcp__readout {
   display: flex;
   flex-direction: column;
-  background: #0a0c08;
-  border: 1px solid #2a2d24;
+  background: #0a0d14;
+  border: 1px solid #283243;
   border-radius: 3px;
   padding: 3px 8px;
 }
 
 .mcp__readout-label {
   font-size: 9px;
-  color: #8f9a80;
+  color: #90a4ae;
 }
 
 .mcp__readout-value {
   font-size: 16px;
   font-weight: 700;
-  color: #9be03a;
+  color: #64b5f6; /* Con số LED hiển thị màu Xanh Dương Sáng */
   font-family: "Consolas", "SFMono-Regular", monospace;
 }
 
@@ -130,7 +146,7 @@
   flex-direction: column;
   gap: 2px;
   font-size: 9.5px;
-  color: #cfd6c4;
+  color: #d0d7de;
 }
 
 .mcp__speed-row {
@@ -146,32 +162,48 @@
 
 .mcp__btn {
   appearance: none;
-  border: 1px solid #3a3f34;
+  border: 1px solid #36465e;
   border-radius: 3px;
-  background: linear-gradient(180deg, #2a2f24 0%, #171a13 100%);
-  color: #cfd6c4;
+  background: linear-gradient(180deg, #253144 0%, #17202e 100%);
+  color: #ffffff;
   font-size: 12px;
   height: 26px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mcp__btn:hover {
-  background: #333a29;
+  background: #2c3a50;
+  border-color: #1976d2;
 }
 
+/* Nút Chạy (Go): Tông Xanh Dương HVU */
 .mcp__btn--go {
-  background: #4f8a1f;
-  color: #0d1206;
-  border-color: #6fae2e;
+  background: linear-gradient(180deg, #1976d2 0%, #0d47a1 100%);
+  color: #ffffff;
+  border-color: #1565c0;
+  font-weight: 600;
 }
 
+.mcp__btn--go:hover {
+  background: #1e88e5;
+}
+
+/* Nút Dừng (Stop): Tông Đỏ Cảnh Báo */
 .mcp__btn--stop {
-  background: #c94a37;
-  color: #1a0a06;
-  border-color: #e0654f;
+  background: linear-gradient(180deg, #e53935 0%, #b71c1c 100%);
+  color: #ffffff;
+  border-color: #c62828;
+  font-weight: 600;
 }
 
-/* Collapsed edge tab used to reopen the panel */
+.mcp__btn--stop:hover {
+  background: #ef5350;
+}
+
+/* Tab thu gọn ở mép màn hình dùng để mở lại Panel */
 .mcp-tab {
   position: fixed;
   top: 90px;
@@ -179,18 +211,19 @@
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   appearance: none;
-  border: 1px solid #3a3f34;
+  border: 1px solid #f4d03f;
   border-right: none;
   border-radius: 4px 0 0 4px;
-  background: linear-gradient(180deg, #6f8a1f 0%, #3c4d10 100%);
-  color: #101206;
+  background: linear-gradient(180deg, #b71c1c 0%, #7f1d1d 100%);
+  color: #ffffff;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   padding: 10px 5px;
   cursor: pointer;
   z-index: 50;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.4);
 }
 
 .mcp-tab:hover {
-  filter: brightness(1.1);
+  background: #c62828;
 }
