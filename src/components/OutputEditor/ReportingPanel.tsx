@@ -85,7 +85,7 @@ export default function ReportingPanel() {
   const stackFieldRow: CSSProperties = { ...s.fieldRow, flexDirection: "column", alignItems: "stretch" };
 
   return (
-    <div style={{ display: "flex", alignItems: "flex-start", gap: 10, width: "100%" }}>
+    <div style={{ display: "flex", alignItems: "stretch", gap: 10, width: "100%", height: "100%", minHeight: 0 }}>
       {/* Left settings column */}
       <div
         style={{
@@ -171,12 +171,16 @@ export default function ReportingPanel() {
         style={{
           flex: "1 1 0%",
           minWidth: 0,
+          minHeight: 0,
           background: colors.panelBg,
           border: `1px solid ${colors.border}`,
           boxSizing: "border-box",
+          display: "flex",
+          flexDirection: "column",
+          overflowY: "auto",
         }}
       >
-        <div style={{ display: "flex", gap: 2, padding: "4px 8px 0", background: colors.headerBg }}>
+        <div style={{ display: "flex", gap: 2, padding: "4px 8px 0", background: colors.headerBg, flex: "0 0 auto" }}>
           <button style={s.tab(reportTab === "summary")} onClick={() => setReportTab("summary")}>
             Summary Report
             {reportTab === "summary" && <span style={{ color: "#8a333a", fontWeight: 700 }}>×</span>}
@@ -193,6 +197,7 @@ export default function ReportingPanel() {
             padding: 6,
             borderBottom: `1px solid ${colors.border}`,
             background: "#f4f6f7",
+            flex: "0 0 auto",
           }}
         >
           {["Layouts", "Add", "Zoom", "Preview", "Edit", "Enlarge", "Shrink", "Delete", "Position"].map(
@@ -204,9 +209,21 @@ export default function ReportingPanel() {
           )}
         </div>
 
-        <div style={s.panelHeader}>Report Preview</div>
-        <div style={{ margin: 8, border: "1px solid #9aa4ab", background: "#fff" }}>
-          <div style={{ display: "flex", borderBottom: "1px solid #c9cfd4" }}>
+        <div style={{ ...s.panelHeader, flex: "0 0 auto" }}>Report Preview</div>
+        <div
+          style={{
+            margin: "8px auto",
+            width: "100%",
+            maxWidth: 1000,
+            border: "1px solid #9aa4ab",
+            background: "#fff",
+            display: "flex",
+            flexDirection: "column",
+            flex: "1 1 0%",
+            minHeight: 0,
+          }}
+        >
+          <div style={{ display: "flex", borderBottom: "1px solid #c9cfd4", flex: "0 0 auto" }}>
             <PreviewCell
               label="Image"
               active={activePanel === "image-left"}
@@ -224,46 +241,40 @@ export default function ReportingPanel() {
             />
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              gap: 0,
-              borderBottom: "1px solid #c9cfd4",
-              fontSize: 10,
-              padding: "3px 8px",
-            }}
-          >
-            <div style={{ flex: "1 1 0%" }}>
-              <span style={{ color: "#46525f" }}>Method Name:</span>{" "}
-              <span style={{ color: colors.ghost, fontWeight: 700 }}>Batches</span>
-            </div>
-            <div style={{ flex: "1 1 0%" }}>
-              <span style={{ color: "#46525f" }}>Output Name:</span>{" "}
-              <span style={{ color: colors.ghost, fontWeight: 700 }}>Batches</span>
-            </div>
+          {/* Batches: 2 ô riêng biệt, có viền, cao hơn để dễ đọc */}
+          <div style={{ display: "flex", borderBottom: "1px solid #c9cfd4", flex: "0 0 auto" }}>
+            <BatchesCell label="Method Name:" />
+            <BatchesCell label="Output Name:" />
           </div>
 
           <div
             style={{
               position: "relative",
-              minHeight: 44,
+              flex: "2 1 0%",
+              minHeight: 0,
               cursor: "pointer",
-              padding: "3px 8px 14px",
+              padding: "6px 8px 8px",
               outline: activePanel === "results" ? `2px solid ${colors.ribbonActive}` : "none",
               outlineOffset: -2,
               boxSizing: "border-box",
+              display: "flex",
+              flexDirection: "column",
+              // Chặn mọi nội dung con (ví dụ chữ "Results" ghost) tràn ra
+              // ngoài khối này, để nó không bao giờ đè lên khối Graph bên dưới.
+              overflow: "hidden",
             }}
             onClick={() => setActivePanel("results")}
           >
             <div
               style={{
                 display: "flex",
-                gap: 8,
-                fontSize: 8,
+                gap: 10,
+                fontSize: 9,
                 color: "#46525f",
                 borderBottom: "1px solid #dfe3e6",
-                paddingBottom: 3,
+                paddingBottom: 4,
                 flexWrap: "wrap",
+                flex: "0 0 auto",
               }}
             >
               {[
@@ -278,7 +289,7 @@ export default function ReportingPanel() {
                 "TE (Manual)\n%",
                 "Area (Reduction)\n%",
               ].map((h) => (
-                <div key={h} style={{ minWidth: 40 }}>
+                <div key={h} style={{ minWidth: 46 }}>
                   {h.split("\n").map((l, i) => (
                     <div key={i}>{l}</div>
                   ))}
@@ -287,12 +298,13 @@ export default function ReportingPanel() {
             </div>
             <div
               style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
+                flex: "1 1 0%",
+                minHeight: 0,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 color: colors.ghost,
-                fontSize: 20,
+                fontSize: 46,
                 fontWeight: 700,
               }}
             >
@@ -300,13 +312,28 @@ export default function ReportingPanel() {
             </div>
           </div>
 
-          <div style={{ display: "flex" }}>
+          {/* Graph: chiếm 1/2 chiều cao còn lại của khung Report Preview,
+              Results (ở trên) chiếm 1/2 còn lại — cả hai đều dùng
+              flex: "1 1 0%" nên luôn chia đôi bằng nhau, không phụ thuộc
+              nội dung. overflow hidden để nội dung graph không tràn ra
+              ngoài phần được chia. */}
+          <div
+            style={{
+              display: "flex",
+              flex: "3 1 0%",
+              minHeight: 0,
+              borderTop: "1px solid #c9cfd4",
+              overflow: "hidden",
+            }}
+          >
             <MiniGraph
               title="Graph"
               yLabel="Stress (ksi)"
               xLabel="Strain (%)"
               yMax={50}
               xMax={2}
+              yStep={5}
+              xStep={0.2}
               active={activePanel === "graph-1"}
               onClick={() => setActivePanel("graph-1")}
               withDivider
@@ -317,6 +344,8 @@ export default function ReportingPanel() {
               xLabel="Position (in)"
               yMax={20000}
               xMax={1}
+              yStep={2000}
+              xStep={0.1}
               active={activePanel === "graph-2"}
               onClick={() => setActivePanel("graph-2")}
             />
@@ -430,7 +459,7 @@ function PreviewCell({ label, active, onClick }: { label: string; active: boolea
         position: "relative",
         flex: "1 1 0%",
         minWidth: 0,
-        height: 50,
+        height: 72,
         borderRight: "1px dashed #cf5b63",
         display: "flex",
         alignItems: "center",
@@ -445,28 +474,63 @@ function PreviewCell({ label, active, onClick }: { label: string; active: boolea
       <span
         style={{
           position: "absolute",
-          top: 2,
+          top: 3,
           left: 0,
           right: 0,
           textAlign: "center",
-          fontSize: 7,
+          fontSize: 8,
           color: colors.danger,
           fontWeight: 600,
         }}
       >
         (PANEL NOT CONFIGURED)
       </span>
-      <span style={{ color: colors.ghost, fontSize: 16, fontWeight: 700 }}>{label}</span>
+      <span style={{ color: colors.ghost, fontSize: 22, fontWeight: 700 }}>{label}</span>
     </div>
   );
 }
 
+// Method Name / Output Name — a bordered cell like PreviewCell above, but
+// taller and with the field label pinned top-left instead of centered.
+function BatchesCell({ label }: { label: string }) {
+  return (
+    <div
+      style={{
+        flex: "1 1 0%",
+        minWidth: 0,
+        height: 56,
+        borderRight: "1px solid #c9cfd4",
+        position: "relative",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        boxSizing: "border-box",
+      }}
+    >
+      <span style={{ position: "absolute", top: 4, left: 8, fontSize: 10, color: "#46525f" }}>{label}</span>
+      <span style={{ color: colors.ghost, fontSize: 20, fontWeight: 700 }}>Batches</span>
+    </div>
+  );
+}
+
+// yStep/xStep drive both the number of grid lines drawn and the tick labels,
+// so the axis always reads in the same round increments as the reference
+// screenshots (Stress every 5 ksi, Strain every 0.2%, Force every 2,000 lbf,
+// Position every 0.1 in) instead of an arbitrary fixed tick count.
+//
+// Đồ thị co giãn lấp đầy chiều cao được cấp (container cha quyết định, hiện
+// đang là 1/2 khung Report Preview) thay vì dùng chiều cao SVG cố định:
+// cột ngoài dùng flexDirection: "column" + flex: 1 trên chính svg, và
+// preserveAspectRatio="none" để svg lấp đầy hoàn toàn ô của nó theo cả hai
+// chiều, không chừa khoảng trống hay bị giới hạn bởi tỉ lệ viewBox gốc.
 function MiniGraph({
   title,
   yLabel,
   xLabel,
   yMax,
   xMax,
+  yStep,
+  xStep,
   active,
   onClick,
   withDivider,
@@ -476,35 +540,41 @@ function MiniGraph({
   xLabel: string;
   yMax: number;
   xMax: number;
+  yStep: number;
+  xStep: number;
   active: boolean;
   onClick: () => void;
   withDivider?: boolean;
 }) {
-  const yTicks = 4;
-  const xTicks = 4;
+  const yTicks = Math.round(yMax / yStep);
+  const xTicks = Math.round(xMax / xStep);
   return (
     <div
       style={{
         position: "relative",
         flex: "1 1 0%",
         minWidth: 0,
-        padding: 4,
+        minHeight: 0,
+        padding: "4px 6px",
         cursor: "pointer",
         borderRight: withDivider ? "1px solid #c9cfd4" : "none",
         outline: active ? `2px solid ${colors.ribbonActive}` : "none",
         outlineOffset: -2,
         boxSizing: "border-box",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
       }}
       onClick={onClick}
     >
       <div
         style={{
           position: "absolute",
-          top: "50%",
+          top: "46%",
           left: "50%",
           transform: "translate(-50%, -50%)",
           color: colors.ghost,
-          fontSize: 16,
+          fontSize: 20,
           fontWeight: 700,
           zIndex: 1,
           pointerEvents: "none",
@@ -515,41 +585,45 @@ function MiniGraph({
       <div
         style={{
           position: "absolute",
-          top: "50%",
+          top: "44%",
           left: 2,
           transform: "rotate(-90deg) translateX(50%)",
-          fontSize: 8,
+          fontSize: 9,
           fontWeight: 600,
         }}
       >
         {yLabel}
       </div>
-      <svg viewBox="0 0 260 150" style={{ width: "100%", height: 90, display: "block" }}>
+      <svg
+        viewBox="0 0 300 190"
+        preserveAspectRatio="none"
+        style={{ width: "100%", flex: "1 1 0%", minHeight: 0, display: "block" }}
+      >
         {Array.from({ length: yTicks + 1 }, (_, i) => {
-          const y = 8 + (1 - i / yTicks) * 112;
+          const y = 6 + (1 - i / yTicks) * 145;
           return (
             <g key={i}>
-              <line x1={38} y1={y} x2={250} y2={y} stroke="#dfe3e6" />
-              <text x={34} y={y + 3} fontSize="7" textAnchor="end">
-                {((yMax * i) / yTicks).toLocaleString()}
+              <line x1={44} y1={y} x2={290} y2={y} stroke="#dfe3e6" />
+              <text x={40} y={y + 3} fontSize="8" textAnchor="end">
+                {(yStep * i).toLocaleString(undefined, { minimumFractionDigits: yStep < 1 ? 2 : 0 })}
               </text>
             </g>
           );
         })}
         {Array.from({ length: xTicks + 1 }, (_, i) => {
-          const x = 38 + (i / xTicks) * 212;
+          const x = 44 + (i / xTicks) * 246;
           return (
             <g key={i}>
-              <line x1={x} y1={8} x2={x} y2={120} stroke="#dfe3e6" />
-              <text x={x} y={131} fontSize="7" textAnchor="middle">
-                {((xMax * i) / xTicks).toFixed(2)}
+              <line x1={x} y1={6} x2={x} y2={151} stroke="#dfe3e6" />
+              <text x={x} y={163} fontSize="8" textAnchor="middle">
+                {(xStep * i).toFixed(xStep < 1 ? 2 : 0)}
               </text>
             </g>
           );
         })}
-        <rect x={38} y={8} width={212} height={112} fill="none" stroke="#9aa4ab" />
+        <rect x={44} y={6} width={246} height={145} fill="none" stroke="#9aa4ab" />
       </svg>
-      <div style={{ textAlign: "center", fontSize: 8, fontWeight: 600 }}>{xLabel}</div>
+      <div style={{ textAlign: "center", fontSize: 10, fontWeight: 600, flex: "0 0 auto" }}>{xLabel}</div>
     </div>
   );
 }

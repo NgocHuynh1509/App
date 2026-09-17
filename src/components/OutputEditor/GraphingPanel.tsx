@@ -63,96 +63,11 @@ export default function GraphingPanel() {
   const X_TICKS = 10;
 
   return (
-    <div style={s.twoColRow}>
-      {/* Left: Plots list */}
-      <div style={s.colPane}>
-        <div style={s.panelHeader}>Plots</div>
-        <div style={s.toolbar}>
-          {[
-            "Add",
-            "Insert Before",
-            "Insert After",
-            "Cut",
-            "Copy",
-            "Paste Current",
-            "Paste Before",
-            "Paste After",
-            "Delete",
-          ].map((label) => (
-            <button key={label} style={s.toolbarBtn}>
-              {label}
-            </button>
-          ))}
-          <div style={{ width: 1, background: colors.border, margin: "0 4px" }} />
-          <button style={s.toolbarBtn}>Expand All</button>
-          <button style={s.toolbarBtn}>Collapse All</button>
-        </div>
-
-        <div style={{ overflowX: "auto" }}>
-          <table style={{ ...s.table, minWidth: 480 }}>
-            <thead>
-              <tr>
-                <th style={s.th}>Plot #</th>
-                <th style={s.th}>Y Axis Source</th>
-                <th style={s.th}>X Axis Source</th>
-                <th style={s.th}>Color</th>
-                <th style={s.th}>Point Size</th>
-                <th style={s.th}>Style</th>
-              </tr>
-            </thead>
-            <tbody>
-              {plots.map((p) => (
-                <tr key={p.id}>
-                  <td style={s.td}>
-                    <span
-                      style={{
-                        display: "inline-block",
-                        width: 8,
-                        height: 8,
-                        borderRadius: "50%",
-                        background: "#2e8b3d",
-                        marginRight: 4,
-                      }}
-                    />
-                    {p.name}
-                  </td>
-                  <td style={s.td}>{p.ySource}</td>
-                  <td style={s.td}>{p.xSource}</td>
-                  <td style={s.td}>
-                    <span
-                      style={{
-                        display: "inline-block",
-                        width: 16,
-                        height: 12,
-                        border: "1px solid #888",
-                        background: p.color,
-                      }}
-                    />
-                  </td>
-                  <td style={s.td}>{p.pointSize}</td>
-                  <td style={s.td}>{p.style}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div style={{ borderTop: `1px solid ${colors.border}` }}>
-          <div style={s.panelHeader}>Graph Preview</div>
-          <GraphPreviewSvg
-            yLabel={yLabel}
-            xLabel={`${xLabel} (${xUnits})`}
-            yHigh={yHigh}
-            xHigh={xHigh}
-            yTicks={Y_TICKS}
-            xTicks={X_TICKS}
-          />
-        </div>
-      </div>
-
-      {/* Right: Requirements / Options */}
-      <div style={s.colPane}>
-        <div>
+    <div style={s.stackCol}>
+      {/* Top row: Requirements + Graph Preview (left) / Graph Options (right) */}
+      <div style={s.twoColRow}>
+        {/* Left: Requirements + Graph Preview */}
+        <div style={s.colPane}>
           <div style={s.panelHeader}>Requirements</div>
           <div style={{ ...s.fieldRow, padding: "6px 8px" }}>
             <label style={{ flex: "0 0 50px" }}>Name:</label>
@@ -189,9 +104,30 @@ export default function GraphingPanel() {
               </button>
             ))}
           </div>
+
+          <div
+            style={{
+              borderTop: `1px solid ${colors.border}`,
+              flex: 1,
+              minHeight: 0,
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <div style={s.panelHeader}>Graph Preview</div>
+            <GraphPreviewSvg
+              yLabel={yLabel}
+              xLabel={`${xLabel} (${xUnits})`}
+              yHigh={yHigh}
+              xHigh={xHigh}
+              yTicks={Y_TICKS}
+              xTicks={X_TICKS}
+            />
+          </div>
         </div>
 
-        <div style={{ borderTop: `1px solid ${colors.border}` }}>
+        {/* Right: Graph Options */}
+        <div style={s.colPane}>
           <div style={s.panelHeader}>Graph Options</div>
           <div
             style={{
@@ -208,7 +144,8 @@ export default function GraphingPanel() {
           <div
             style={{
               display: "flex",
-              gap: 10,
+              flexDirection: "column",
+              gap: 6,
               padding: 8,
               width: "100%",
               boxSizing: "border-box",
@@ -376,6 +313,80 @@ export default function GraphingPanel() {
           </div>
         </div>
       </div>
+
+      {/* Bottom: Plots — full width, own bordered panel */}
+      <div style={s.fullWidthPane}>
+        <div style={s.panelHeader}>Plots</div>
+        <div style={s.toolbar}>
+          {[
+            "Add",
+            "Insert Before",
+            "Insert After",
+            "Cut",
+            "Copy",
+            "Paste Current",
+            "Paste Before",
+            "Paste After",
+            "Delete",
+          ].map((label) => (
+            <button key={label} style={s.toolbarBtn}>
+              {label}
+            </button>
+          ))}
+          <div style={{ width: 1, background: colors.border, margin: "0 4px" }} />
+          <button style={s.toolbarBtn}>Expand All</button>
+          <button style={s.toolbarBtn}>Collapse All</button>
+        </div>
+
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ ...s.table, minWidth: 480 }}>
+            <thead>
+              <tr>
+                <th style={s.th}>Plot #</th>
+                <th style={s.th}>Y Axis Source</th>
+                <th style={s.th}>X Axis Source</th>
+                <th style={s.th}>Color</th>
+                <th style={s.th}>Point Size</th>
+                <th style={s.th}>Style</th>
+              </tr>
+            </thead>
+            <tbody>
+              {plots.map((p) => (
+                <tr key={p.id}>
+                  <td style={s.td}>
+                    <span
+                      style={{
+                        display: "inline-block",
+                        width: 8,
+                        height: 8,
+                        borderRadius: "50%",
+                        background: "#2e8b3d",
+                        marginRight: 4,
+                      }}
+                    />
+                    {p.name}
+                  </td>
+                  <td style={s.td}>{p.ySource}</td>
+                  <td style={s.td}>{p.xSource}</td>
+                  <td style={s.td}>
+                    <span
+                      style={{
+                        display: "inline-block",
+                        width: 16,
+                        height: 12,
+                        border: "1px solid #888",
+                        background: p.color,
+                      }}
+                    />
+                  </td>
+                  <td style={s.td}>{p.pointSize}</td>
+                  <td style={s.td}>{p.style}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }
@@ -416,12 +427,16 @@ function GraphPreviewSvg({
   const yVals = Array.from({ length: yTicks + 1 }, (_, i) => ((yHigh || 44.48) * i) / yTicks);
   const xVals = Array.from({ length: xTicks + 1 }, (_, i) => ((xHigh || 25.4) * i) / xTicks);
 
+  // Giãn lấp đầy phần còn trống của cột trái (bằng chiều cao cột Graph Options
+  // bên phải nhờ alignItems: "stretch" ở twoColRow), thay vì kích thước cố định.
   const frameStyle: CSSProperties = {
     display: "grid",
     gridTemplateColumns: "20px 1fr",
-    gridTemplateRows: "1fr 24px",
+    gridTemplateRows: "1fr 22px",
     padding: 8,
     boxSizing: "border-box",
+    flex: 1,
+    minHeight: 0,
   };
 
   return (
@@ -432,7 +447,7 @@ function GraphPreviewSvg({
           writingMode: "vertical-rl",
           transform: "rotate(180deg)",
           textAlign: "center",
-          fontSize: 11,
+          fontSize: 10,
           fontWeight: 600,
         }}
       >
@@ -440,7 +455,7 @@ function GraphPreviewSvg({
       </div>
       <svg
         viewBox={`0 0 ${width} ${height}`}
-        style={{ gridRow: 1, width: "100%", height: 260, background: "#fff" }}
+        style={{ gridRow: 1, width: "100%", height: "100%", minHeight: 0, background: "#fff" }}
         preserveAspectRatio="xMidYMid meet"
       >
         {yVals.map((v, i) => {
@@ -467,7 +482,7 @@ function GraphPreviewSvg({
         })}
         <rect x={padL} y={padT} width={plotW} height={plotH} fill="none" stroke="#9aa4ab" />
       </svg>
-      <div style={{ gridColumn: 2, textAlign: "center", fontSize: 11, fontWeight: 600 }}>
+      <div style={{ gridColumn: 2, textAlign: "center", fontSize: 10, fontWeight: 600 }}>
         {xLabel}
       </div>
     </div>
