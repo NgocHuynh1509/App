@@ -12,11 +12,11 @@
   flex: 0 0 auto;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
+  gap: 8px;
+  padding: 7px 10px;
   background: linear-gradient(180deg, #23291c 0%, #14170f 100%);
   border: 1px solid #2c2f28;
-  border-radius: 2px;
+  border-radius: 3px;
   font-size: 11px;
 }
 
@@ -33,47 +33,166 @@
   flex: 1 1 auto;
 }
 
+/* ---- Nút dùng chung (Load / Save / Save As / Insert / Reset Location...) ---- */
 .result-editor__tool {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   appearance: none;
   border: 1px solid #3a3f34;
-  background: #1c2018;
+  background: linear-gradient(180deg, #23271e 0%, #191d16 100%);
   color: #cfd6c4;
-  font-size: 10px;
-  padding: 4px 8px;
-  border-radius: 3px;
+  font-size: 10.5px;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 4px;
   cursor: pointer;
   white-space: nowrap;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 1px 2px rgba(0, 0, 0, 0.35);
+  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease,
+    transform 80ms ease, color 120ms ease;
 }
 
-.result-editor__tool:hover {
-  background: #2a3021;
+.result-editor__tool:hover:not(:disabled) {
+  background: linear-gradient(180deg, #2d3324 0%, #20251a 100%);
+  border-color: #4c5640;
+  color: #e4e8dc;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 2px 5px rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+.result-editor__tool:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4) inset;
+}
+
+.result-editor__tool:focus-visible {
+  outline: 2px solid #cbe86a;
+  outline-offset: 1px;
 }
 
 .result-editor__tool:disabled {
-  opacity: 0.45;
+  opacity: 0.4;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Nút hành động chính (Save) — nổi bật bằng gradient olive-green thương hiệu */
+.result-editor__tool--primary {
+  background: linear-gradient(180deg, #cbe86a 0%, #86b31d 100%);
+  border-color: #86b31d;
+  color: #0d1206;
+  font-weight: 700;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.35) inset, 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+.result-editor__tool--primary:hover:not(:disabled) {
+  background: linear-gradient(180deg, #d7f184 0%, #96c624 100%);
+  border-color: #96c624;
+  color: #0d1206;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.45) inset, 0 3px 7px rgba(0, 0, 0, 0.4);
+}
+
+.result-editor__tool--primary:active:not(:disabled) {
+  background: linear-gradient(180deg, #b9d95c 0%, #79a119 100%);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35) inset;
+}
+
+/* Nút hành động phụ nổi bật hơn mức mặc định (Insert, Select All khi chưa chọn hết) */
+.result-editor__tool--accent {
+  border-color: #6d8c22;
+  color: #d7f184;
+}
+
+.result-editor__tool--accent:hover:not(:disabled) {
+  border-color: #86b31d;
+  background: linear-gradient(180deg, #2c3620 0%, #1e2617 100%);
+  color: #eaffb0;
 }
 
 .result-editor__tool-icon {
-  font-size: 11px;
-  color: #9be03a;
+  font-size: 12px;
+  line-height: 1;
+  display: inline-flex;
 }
 
 .result-editor__tool-icon--danger {
   color: #e0473a;
 }
 
+/* ---- Công tắc bật/tắt Standard Result (thay cho checkbox thô) ---- */
+.result-editor__switch-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10.5px;
+  color: #a9b39a;
+  cursor: pointer;
+  user-select: none;
+}
+
+.result-editor__switch {
+  position: relative;
+  display: inline-flex;
+  width: 30px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+.result-editor__switch input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.result-editor__switch-track {
+  position: absolute;
+  inset: 0;
+  background: #2a2f24;
+  border: 1px solid #3a3f34;
+  border-radius: 999px;
+  transition: background 150ms ease, border-color 150ms ease;
+}
+
+.result-editor__switch-thumb {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #8a9280;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  transition: transform 150ms ease, background 150ms ease;
+}
+
+.result-editor__switch input:checked ~ .result-editor__switch-track {
+  background: linear-gradient(180deg, #cbe86a 0%, #86b31d 100%);
+  border-color: #86b31d;
+}
+
+.result-editor__switch input:checked ~ .result-editor__switch-track .result-editor__switch-thumb {
+  transform: translateX(14px);
+  background: #0d1206;
+}
+
+.result-editor__switch input:focus-visible ~ .result-editor__switch-track {
+  outline: 2px solid #cbe86a;
+  outline-offset: 2px;
+}
+
+/* ---- Ribbon 3 tab (Base Information / Result Type / Output Selection) ---- */
 .result-editor__ribbon {
   flex: 0 0 auto;
   display: flex;
-  gap: 4px;
-  padding: 6px 8px;
+  gap: 5px;
+  padding: 7px 8px;
   background: #14170f;
   border: 1px solid #2c2f28;
-  border-radius: 2px;
+  border-radius: 3px;
   overflow-x: auto;
 }
 
@@ -87,20 +206,32 @@
   background: transparent;
   color: #a9b39a;
   font-size: 9.5px;
-  padding: 5px 10px;
-  border-radius: 3px;
+  padding: 6px 12px;
+  border-radius: 4px;
   cursor: pointer;
   white-space: nowrap;
   text-align: center;
+  transition: background 120ms ease, transform 80ms ease, box-shadow 120ms ease, color 120ms ease;
 }
 
 .result-editor__ribbon-item:hover {
-  background: #1c2018;
+  background: #1f251a;
+  color: #cfd6c4;
+}
+
+.result-editor__ribbon-item:active {
+  transform: translateY(1px);
+}
+
+.result-editor__ribbon-item:focus-visible {
+  outline: 2px solid #cbe86a;
+  outline-offset: 1px;
 }
 
 .result-editor__ribbon-icon {
   font-size: 15px;
   color: #9be03a;
+  transition: color 120ms ease;
 }
 
 .result-editor__ribbon-label {
@@ -113,7 +244,13 @@
   background: linear-gradient(180deg, #cbe86a 0%, #86b31d 100%);
   border-color: #86b31d;
   color: #0d1206;
-  font-weight: 600;
+  font-weight: 700;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.35) inset, 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.result-editor__ribbon-item--active:hover {
+  background: linear-gradient(180deg, #d7f184 0%, #96c624 100%);
+  color: #0d1206;
 }
 
 .result-editor__ribbon-item--active .result-editor__ribbon-icon {
@@ -182,6 +319,15 @@
   font-size: 10.5px;
   padding: 4px 6px;
   border-radius: 3px;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.result-editor__field-grid input:focus,
+.result-editor__field-grid textarea:focus,
+.result-editor__field-grid select:focus {
+  outline: none;
+  border-color: #86b31d;
+  box-shadow: 0 0 0 2px rgba(155, 224, 58, 0.25);
 }
 
 .result-editor__readonly {
@@ -197,6 +343,14 @@
   font-size: 10.5px;
   color: #cfd6c4;
   margin: 6px 0;
+}
+
+.result-editor__checkbox input[type="checkbox"],
+.result-editor__param-table input[type="radio"] {
+  accent-color: #9be03a;
+  width: 13px;
+  height: 13px;
+  cursor: pointer;
 }
 
 .result-editor__checkbox--aligned {
@@ -223,6 +377,13 @@
   border-bottom: 1px solid #1a1d16;
 }
 
+.result-editor__mini-table input[type="checkbox"] {
+  accent-color: #9be03a;
+  width: 13px;
+  height: 13px;
+  cursor: pointer;
+}
+
 .result-editor__order-input {
   width: 48px;
   background: #0e100d;
@@ -245,9 +406,16 @@
   border: 1px solid #3a3f34;
   color: #e4e8dc;
   font-size: 10.5px;
-  padding: 4px 8px;
-  border-radius: 3px;
+  padding: 5px 9px;
+  border-radius: 4px;
   min-width: 180px;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.result-editor__search:focus {
+  outline: none;
+  border-color: #86b31d;
+  box-shadow: 0 0 0 2px rgba(155, 224, 58, 0.25);
 }
 
 .result-editor__param-table {
@@ -286,6 +454,10 @@
   background: #1a1a10;
 }
 
+.result-editor__param-row--selected td {
+  border-bottom-color: #3a3f22;
+}
+
 .result-editor__formula-field {
   gap: 8px;
 }
@@ -320,11 +492,6 @@
   color: #d9b23c;
 }
 
-.result-editor__demo-toggle {
-  font-size: 10px;
-  color: #6b7362;
-}
-
 .result-editor__warning {
   color: #d9b23c;
   font-style: italic;
@@ -341,27 +508,43 @@ fieldset.result-editor__box:disabled {
   color: #6b7362;
 }
 
+/* ---- Nhóm nút chuyển đổi kiểu segmented control (Specified / Force) ---- */
 .result-editor__toggle-group {
-  display: flex;
-  gap: 4px;
+  display: inline-flex;
+  gap: 0;
+  border: 1px solid #3a3f34;
+  border-radius: 5px;
+  overflow: hidden;
+  background: #14170f;
 }
 
 .result-editor__toggle-btn {
   appearance: none;
-  border: 1px solid #3a3f34;
-  background: #1c2018;
-  color: #cfd6c4;
+  border: none;
+  background: transparent;
+  color: #a9b39a;
   font-size: 10.5px;
-  padding: 4px 10px;
-  border-radius: 3px;
+  font-weight: 500;
+  padding: 5px 14px;
   cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+  position: relative;
+}
+
+.result-editor__toggle-btn + .result-editor__toggle-btn {
+  border-left: 1px solid #3a3f34;
+}
+
+.result-editor__toggle-btn:hover:not(.result-editor__toggle-btn--active) {
+  background: #1f251a;
+  color: #cfd6c4;
 }
 
 .result-editor__toggle-btn--active {
   background: linear-gradient(180deg, #cbe86a 0%, #86b31d 100%);
   color: #0d1206;
-  font-weight: 600;
-  border-color: #86b31d;
+  font-weight: 700;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.35) inset;
 }
 
 .result-editor__hint--tight {
