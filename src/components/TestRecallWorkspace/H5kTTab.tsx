@@ -7,9 +7,10 @@ interface Props {
   liveData: LiveData;
   curve: GraphPoint[];
   specimens: Specimen[];
+  onRegenerate?: () => void;
 }
 
-export default function H5kTTab({ liveData, curve, specimens }: Props) {
+export default function H5kTTab({ liveData, curve, specimens, onRegenerate }: Props) {
   return (
     <div className="h5kt-tab">
       {/* MACHINE STATUS LINE */}
@@ -33,7 +34,7 @@ export default function H5kTTab({ liveData, curve, specimens }: Props) {
             </div>
           </div>
           <div className="h5kt-graph-content">
-            <GraphPanel data={curve} maxForce={7500} maxPosition={0.13} />
+            <GraphPanel data={curve} />
           </div>
         </section>
 
@@ -168,7 +169,7 @@ export default function H5kTTab({ liveData, curve, specimens }: Props) {
           <span className="h5kt-results__title">Testing - Single Mode</span>
           <div className="h5kt-results__tools">
             <button>🖨 Print</button>
-            <button>🔄 Regenerate</button>
+            <button onClick={onRegenerate}>🔄 Regenerate</button>
             <button>➕ Add ▾</button>
             <button>💬 Comments</button>
             <button>🧹 Clear Completed ▾</button>

@@ -2,141 +2,190 @@ import { useMemo } from "react";
 import type { GraphPoint } from "../../types";
 import "./GraphPanel.css";
 
-// Khai báo rõ ràng thuộc tính data để H5kTTab không bị báo lỗi TypeScript
 export interface GraphPanelProps {
   data?: GraphPoint[];
-  maxForce?: number;
-  maxPosition?: number;
 }
 
+// Số điểm gần nhất được hiển thị cùng lúc trên màn hình (cửa sổ trượt
+// theo SỐ ĐIỂM, không phải theo mốc position cố định nào — nên sẽ
+// không bao giờ "kẹt" ở một giá trị X nào cả, cứ chạy là trượt tiếp).
+const VISIBLE_POINT_COUNT = 60;
+
 const PADDING = { top: 20, right: 30, bottom: 60, left: 70 };
+const MIN_RANGE_SPAN = 200;
 
-const DEFAULT_CURVE: GraphPoint[] = [
-  { position: 0.00, force: 0 },
-  { position: 0.01, force: 1800 },
-  { position: 0.02, force: 3400 },
-  { position: 0.03, force: 4700 },
-  { position: 0.04, force: 5600 },
-  { position: 0.05, force: 6200 },
-  { position: 0.06, force: 6700 },
-  { position: 0.08, force: 7000 },
-  { position: 0.10, force: 7150 },
-  { position: 0.11, force: 7100 },
-];
+function buildSmoothPath(coords: { x: number; y: number }[]): string {
+  if (coords.length === 0) return "";
+  if (coords.length === 1) {
+    return `M ${coords[0].x.toFixed(2)} ${coords[0].y.toFixed(2)}`;
+  }
+  if (coords.length === 2) {
+    return (
+      `M ${coords[0].x.toFixed(2)} ${coords[0].y.toFixed(2)} ` +
+      `L ${coords[1].x.toFixed(2)} ${coords[1].y.toFixed(2)}`
+    );
+  }
 
-export default function GraphPanel({
-  data,
-  maxForce = 7500,
-  maxPosition = 0.13,
-}: GraphPanelProps) {
+  let d = `M ${coords[0].x.toFixed(2)} ${coords[0].y.toFixed(2)}`;
+
+  for (let i = 0; i < coords.length - 1; i++) {
+    const p0 = coords[i === 0 ? 0 : i - 1];
+    const p1 = coords[i];
+    const p2 = coords[i + 1];
+    const p3 = coords[i + 2 < coords.length ? i + 2 : i + 1];
+
+    const cp1x = p1.x + (p2.x - p0.x) / 6;
+    const cp1y = p1.y + (p2.y - p0.y) / 6;
+    const cp2x = p2.x - (p3.x - p1.x) / 6;
+    const cp2y = p2.y - (p3.y - p1.y) / 6;
+
+    d +=
+      ` C ${cp1x.toFixed(2)} ${cp1y.toFixed(2)}, ` +
+      `${cp2x.toFixed(2)} ${cp2y.toFixed(2)}, ` +
+      `${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`;
+  }
+
+  return d;
+}
+
+export default function GraphPanel({ data = [] }: GraphPanelProps) {
   const width = 700;
   const height = 360;
+
   const plotW = width - PADDING.left - PADDING.right;
   const plotH = height - PADDING.top - PADDING.bottom;
 
-const points = useMemo(() => {
-  if (!data || data.length === 0) return DEFAULT_CURVE;
-  const maxVal = Math.max(...data.map((d) => Math.abs(d.force)));
-  return maxVal < 100 ? DEFAULT_CURVE : data; // Nếu dữ liệu truyền vào có force bé sẽ bị reset về DEFAULT_CURVE
-}, [data]);
+  // Luôn chỉ lấy N điểm CUỐI CÙNG — bất kể data dài bao nhiêu,
+  // đây chính là thứ khiến đồ thị "chạy mãi không dừng".
+  const visiblePoints = useMemo(() => {
+    if (data.length <= VISIBLE_POINT_COUNT) return data;
+    return data.slice(data.length - VISIBLE_POINT_COUNT);
+  }, [data]);
+
+  const visibleRange = useMemo(() => {
+    if (visiblePoints.length === 0) {
+      return { min: 0, max: 1 };
+    }
+    const first = visiblePoints[0].position;
+    const last = visiblePoints[visiblePoints.length - 1].position;
+    return first === last ? { min: first, max: first + 1 } : { min: first, max: last };
+  }, [visiblePoints]);
+
+  const range = visibleRange.max - visibleRange.min || 1;
+
+  const forceRange = useMemo(() => {
+    if (visiblePoints.length === 0) {
+      return { min: -MIN_RANGE_SPAN, max: MIN_RANGE_SPAN };
+    }
+    const forces = visiblePoints.map((p) => p.force);
+    const dataMin = Math.min(...forces);
+    const dataMax = Math.max(...forces);
+    const span = dataMax - dataMin;
+
+    if (span < MIN_RANGE_SPAN) {
+      const center = (dataMax + dataMin) / 2;
+      return { min: center - MIN_RANGE_SPAN / 2, max: center + MIN_RANGE_SPAN / 2 };
+    }
+
+    const pad = span * 0.15;
+    return { min: dataMin - pad, max: dataMax + pad };
+  }, [visiblePoints]);
+
+  const getX = (position: number) =>
+    PADDING.left + ((position - visibleRange.min) / range) * plotW;
+
+  const getY = (force: number) => {
+    const { min, max } = forceRange;
+    const span = max - min || 1;
+    const clamped = Math.max(0, Math.min(1, (force - min) / span));
+    return PADDING.top + plotH - clamped * plotH;
+  };
 
   const pathD = useMemo(() => {
-    return points
-      .map((p, i) => {
-        const x = PADDING.left + (p.position / maxPosition) * plotW;
-        const y = PADDING.top + plotH - (Math.abs(p.force) / maxForce) * plotH;
-        return `${i === 0 ? "M" : "L"} ${x.toFixed(2)} ${y.toFixed(2)}`;
-      })
-      .join(" ");
-  }, [points, maxForce, maxPosition, plotW, plotH]);
+    const coords = visiblePoints.map((p) => ({ x: getX(p.position), y: getY(p.force) }));
+    return buildSmoothPath(coords);
+  }, [visiblePoints, visibleRange, forceRange]);
 
-  const yTicks = [0, 1250, 2500, 3750, 5000, 6250, 7500];
-  const xTicks = [0.00, 0.02, 0.03, 0.05, 0.07, 0.08, 0.10, 0.11, 0.13];
+  const yTicks = useMemo(() => {
+    const count = 7;
+    const { min, max } = forceRange;
+    return Array.from({ length: count }, (_, i) => min + ((max - min) * i) / (count - 1));
+  }, [forceRange]);
 
-  const lastPt = points[points.length - 1];
-  const lastX = PADDING.left + (lastPt.position / maxPosition) * plotW;
-  const lastY = PADDING.top + plotH - (Math.abs(lastPt.force) / maxForce) * plotH;
+  const xTicks = useMemo(() => {
+    const count = 7;
+    return Array.from(
+      { length: count },
+      (_, i) => visibleRange.min + (range * i) / (count - 1)
+    );
+  }, [visibleRange, range]);
+
+  const lastPt = visiblePoints.length > 0 ? visiblePoints[visiblePoints.length - 1] : null;
+  const lastX = lastPt ? getX(lastPt.position) : 0;
+  const lastY = lastPt ? getY(lastPt.force) : 0;
 
   return (
     <div className="graph-panel">
-      <div className="graph-panel__header">Force vs. Position</div>
+      <div className="graph-panel__header">
+        <span>Force vs. Position</span>
+        {lastPt && (
+          <span className="graph-panel__live">
+            <span className="graph-panel__live-dot">●</span>
+            LIVE
+          </span>
+        )}
+      </div>
 
       <div className="graph-panel__body">
-        <svg
-          className="graph-panel__svg"
-          viewBox={`0 0 ${width} ${height}`}
-          preserveAspectRatio="none"
-        >
-          {yTicks.map((val) => {
-            const y = PADDING.top + plotH - (val / maxForce) * plotH;
+        <svg className="graph-panel__svg" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none">
+          <defs>
+            <clipPath id="graph-plot-clip">
+              <rect x={PADDING.left} y={PADDING.top} width={plotW} height={plotH} />
+            </clipPath>
+          </defs>
+
+          {yTicks.map((value, i) => {
+            const y = getY(value);
             return (
-              <g key={`y-${val}`}>
-                <line
-                  x1={PADDING.left}
-                  x2={width - PADDING.right}
-                  y1={y}
-                  y2={y}
-                  className="graph-panel__gridline"
-                />
-                <text
-                  x={PADDING.left - 10}
-                  y={y + 4}
-                  className="graph-panel__tick graph-panel__tick--y"
-                >
-                  {val === 0 ? "0" : val.toLocaleString()}
+              <g key={`y-${i}`}>
+                <line x1={PADDING.left} x2={width - PADDING.right} y1={y} y2={y} className="graph-panel__gridline" />
+                <text x={PADDING.left - 10} y={y + 4} className="graph-panel__tick graph-panel__tick--y">
+                  {Math.round(value).toLocaleString()}
                 </text>
               </g>
             );
           })}
 
-          {xTicks.map((val) => {
-            const x = PADDING.left + (val / maxPosition) * plotW;
+          {xTicks.map((value, index) => {
+            const x = getX(value);
             return (
-              <g key={`x-${val}`}>
-                <line
-                  x1={x}
-                  x2={x}
-                  y1={PADDING.top}
-                  y2={height - PADDING.bottom}
-                  className="graph-panel__gridline"
-                />
-                <text
-                  x={x}
-                  y={height - PADDING.bottom + 16}
-                  className="graph-panel__tick graph-panel__tick--x"
-                >
-                  {val.toFixed(2)}
+              <g key={`x-${index}`}>
+                <line x1={x} x2={x} y1={PADDING.top} y2={height - PADDING.bottom} className="graph-panel__gridline" />
+                <text x={x} y={height - PADDING.bottom + 18} textAnchor="middle" className="graph-panel__tick graph-panel__tick--x">
+                  {value.toFixed(3)}
                 </text>
               </g>
             );
           })}
 
-          <rect
-            x={PADDING.left}
-            y={PADDING.top}
-            width={plotW}
-            height={plotH}
-            className="graph-panel__border"
-          />
+          <rect x={PADDING.left} y={PADDING.top} width={plotW} height={plotH} className="graph-panel__border" />
 
-          <path d={pathD} className="graph-panel__curve" />
+          {pathD && (
+            <g clipPath="url(#graph-plot-clip)">
+              <path d={pathD} className="graph-panel__curve" />
+              {lastPt && (
+                <>
+                  <circle cx={lastX} cy={lastY} r="7" className="graph-panel__break-point-glow" />
+                  <circle cx={lastX} cy={lastY} r="4" className="graph-panel__break-point" />
+                </>
+              )}
+            </g>
+          )}
 
-          <circle cx={lastX} cy={lastY} r="4" className="graph-panel__break-point" />
-
-          <text
-            x={-(PADDING.top + plotH / 2)}
-            y={20}
-            className="graph-panel__axis-label"
-            transform="rotate(-90)"
-          >
+          <text x={-(PADDING.top + plotH / 2)} y={20} className="graph-panel__axis-label" transform="rotate(-90)" textAnchor="middle">
             Force (lbf)
           </text>
-
-          <text
-            x={PADDING.left + plotW / 2}
-            y={height - 12}
-            className="graph-panel__axis-label"
-          >
+          <text x={PADDING.left + plotW / 2} y={height - 12} className="graph-panel__axis-label" textAnchor="middle">
             Position (in)
           </text>
         </svg>
