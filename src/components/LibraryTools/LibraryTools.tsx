@@ -1,6 +1,8 @@
 import { useMemo, useRef, useState } from "react";
 import type { TestMethod } from "../../types";
 import { STANDARD_METHODS, WORKING_METHODS } from "./methodData";
+import OutputsPanel from "./OutputSpanel.tsx";
+import ResultsPanel from "./ResultSpanel.tsx";
 import "./LibraryTools.css";
 
 const METHOD_TYPES = ["All", "UTM", "MTM", "UTM/MTM"];
@@ -40,11 +42,16 @@ function CategoryStub({ title }: { title: string }) {
     </div>
   );
 }
+void CategoryStub; // giữ lại phòng khi cần placeholder cho mục khác sau này
 
 export default function LibraryTools({
   onSelectMethod,
+  onSelectOutput,
+  onSelectResult,
 }: {
   onSelectMethod?: (name: string) => void;
+  onSelectOutput?: (name: string) => void;
+  onSelectResult?: (name: string) => void;
 }) {
   const [activeCategory, setActiveCategory] = useState<CategoryKey>("methods");
   const [tabs, setTabs] = useState<LibTab[]>(INITIAL_TABS);
@@ -116,10 +123,10 @@ export default function LibraryTools({
         ))}
       </nav>
 
-      {activeCategory !== "methods" ? (
-        <CategoryStub
-          title={activeCategory === "outputs" ? "Library of Outputs" : "Library of Results"}
-        />
+      {activeCategory === "outputs" ? (
+        <OutputsPanel onSelectOutput={onSelectOutput} />
+      ) : activeCategory === "results" ? (
+        <ResultsPanel onSelectResult={onSelectResult} />
       ) : (
         <>
           {/* Hàng 1: tab thư viện + bộ lọc + advanced query */}

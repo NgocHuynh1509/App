@@ -136,9 +136,21 @@ export default function GraphingPanel() {
             </tbody>
           </table>
         </div>
+
+        <div style={{ borderTop: `1px solid ${colors.border}` }}>
+          <div style={s.panelHeader}>Graph Preview</div>
+          <GraphPreviewSvg
+            yLabel={yLabel}
+            xLabel={`${xLabel} (${xUnits})`}
+            yHigh={yHigh}
+            xHigh={xHigh}
+            yTicks={Y_TICKS}
+            xTicks={X_TICKS}
+          />
+        </div>
       </div>
 
-      {/* Right: Requirements / Preview / Options */}
+      {/* Right: Requirements / Options */}
       <div style={s.colPane}>
         <div>
           <div style={s.panelHeader}>Requirements</div>
@@ -177,18 +189,6 @@ export default function GraphingPanel() {
               </button>
             ))}
           </div>
-        </div>
-
-        <div style={{ borderTop: `1px solid ${colors.border}` }}>
-          <div style={s.panelHeader}>Graph Preview</div>
-          <GraphPreviewSvg
-            yLabel={yLabel}
-            xLabel={`${xLabel} (${xUnits})`}
-            yHigh={yHigh}
-            xHigh={xHigh}
-            yTicks={Y_TICKS}
-            xTicks={X_TICKS}
-          />
         </div>
 
         <div style={{ borderTop: `1px solid ${colors.border}` }}>

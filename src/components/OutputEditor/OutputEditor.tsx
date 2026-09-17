@@ -2,7 +2,10 @@ import { useState } from "react";
 import type { CSSProperties } from "react";
 import GraphingPanel from "./GraphingPanel";
 import ReportingPanel from "./ReportingPanel";
-import PlaceholderPanel from "./PlaceholderPanel";
+import OutputOverviewPanel from "./OutputOverviewPanel.tsx";
+import LiveDataPanel from "./LiveDataPanel.tsx";
+import ResultLimitsPanel from "./ResultLimitsPanel.tsx";
+import DataExportingPanel from "./DataExportingPanel.tsx";
 import { colors, s } from "./Styles";
 
 export type OutputSubTab =
@@ -129,10 +132,10 @@ export default function OutputEditor({
       <div style={s.body}>
         {subTab === "graphing" && <GraphingPanel />}
         {subTab === "reporting" && <ReportingPanel />}
-        {subTab === "overview" && <PlaceholderPanel title="Output Overview" />}
-        {subTab === "live-data" && <PlaceholderPanel title="Live Data" />}
-        {subTab === "result-limits" && <PlaceholderPanel title="Result Limits" />}
-        {subTab === "data-exporting" && <PlaceholderPanel title="Data Exporting" />}
+        {subTab === "overview" && <OutputOverviewPanel />}
+        {subTab === "live-data" && <LiveDataPanel />}
+        {subTab === "result-limits" && <ResultLimitsPanel />}
+        {subTab === "data-exporting" && <DataExportingPanel />}
       </div>
     </div>
   );

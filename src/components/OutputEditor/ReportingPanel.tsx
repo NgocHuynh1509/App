@@ -1,5 +1,5 @@
 import { useState, type CSSProperties } from "react";
-import { colors, s } from "./styles";
+import { colors, s } from "./Styles";
 
 interface ResultRow {
   order: number;
@@ -205,7 +205,7 @@ export default function ReportingPanel() {
         </div>
 
         <div style={s.panelHeader}>Report Preview</div>
-        <div style={{ margin: 10, border: "1px solid #9aa4ab", background: "#fff" }}>
+        <div style={{ margin: 8, border: "1px solid #9aa4ab", background: "#fff" }}>
           <div style={{ display: "flex", borderBottom: "1px solid #c9cfd4" }}>
             <PreviewCell
               label="Image"
@@ -229,8 +229,8 @@ export default function ReportingPanel() {
               display: "flex",
               gap: 0,
               borderBottom: "1px solid #c9cfd4",
-              fontSize: 11,
-              padding: "4px 8px",
+              fontSize: 10,
+              padding: "3px 8px",
             }}
           >
             <div style={{ flex: "1 1 0%" }}>
@@ -246,9 +246,9 @@ export default function ReportingPanel() {
           <div
             style={{
               position: "relative",
-              minHeight: 90,
+              minHeight: 44,
               cursor: "pointer",
-              padding: "4px 8px 24px",
+              padding: "3px 8px 14px",
               outline: activePanel === "results" ? `2px solid ${colors.ribbonActive}` : "none",
               outlineOffset: -2,
               boxSizing: "border-box",
@@ -258,11 +258,11 @@ export default function ReportingPanel() {
             <div
               style={{
                 display: "flex",
-                gap: 10,
-                fontSize: 9,
+                gap: 8,
+                fontSize: 8,
                 color: "#46525f",
                 borderBottom: "1px solid #dfe3e6",
-                paddingBottom: 4,
+                paddingBottom: 3,
                 flexWrap: "wrap",
               }}
             >
@@ -278,7 +278,7 @@ export default function ReportingPanel() {
                 "TE (Manual)\n%",
                 "Area (Reduction)\n%",
               ].map((h) => (
-                <div key={h} style={{ minWidth: 46 }}>
+                <div key={h} style={{ minWidth: 40 }}>
                   {h.split("\n").map((l, i) => (
                     <div key={i}>{l}</div>
                   ))}
@@ -292,7 +292,7 @@ export default function ReportingPanel() {
                 left: "50%",
                 transform: "translate(-50%, -50%)",
                 color: colors.ghost,
-                fontSize: 32,
+                fontSize: 20,
                 fontWeight: 700,
               }}
             >
@@ -430,7 +430,7 @@ function PreviewCell({ label, active, onClick }: { label: string; active: boolea
         position: "relative",
         flex: "1 1 0%",
         minWidth: 0,
-        height: 90,
+        height: 50,
         borderRight: "1px dashed #cf5b63",
         display: "flex",
         alignItems: "center",
@@ -445,18 +445,18 @@ function PreviewCell({ label, active, onClick }: { label: string; active: boolea
       <span
         style={{
           position: "absolute",
-          top: 4,
+          top: 2,
           left: 0,
           right: 0,
           textAlign: "center",
-          fontSize: 9,
+          fontSize: 7,
           color: colors.danger,
           fontWeight: 600,
         }}
       >
         (PANEL NOT CONFIGURED)
       </span>
-      <span style={{ color: colors.ghost, fontSize: 28, fontWeight: 700 }}>{label}</span>
+      <span style={{ color: colors.ghost, fontSize: 16, fontWeight: 700 }}>{label}</span>
     </div>
   );
 }
@@ -480,15 +480,15 @@ function MiniGraph({
   onClick: () => void;
   withDivider?: boolean;
 }) {
-  const yTicks = 5;
-  const xTicks = 5;
+  const yTicks = 4;
+  const xTicks = 4;
   return (
     <div
       style={{
         position: "relative",
         flex: "1 1 0%",
         minWidth: 0,
-        padding: 6,
+        padding: 4,
         cursor: "pointer",
         borderRight: withDivider ? "1px solid #c9cfd4" : "none",
         outline: active ? `2px solid ${colors.ribbonActive}` : "none",
@@ -504,7 +504,7 @@ function MiniGraph({
           left: "50%",
           transform: "translate(-50%, -50%)",
           color: colors.ghost,
-          fontSize: 26,
+          fontSize: 16,
           fontWeight: 700,
           zIndex: 1,
           pointerEvents: "none",
@@ -518,38 +518,38 @@ function MiniGraph({
           top: "50%",
           left: 2,
           transform: "rotate(-90deg) translateX(50%)",
-          fontSize: 9,
+          fontSize: 8,
           fontWeight: 600,
         }}
       >
         {yLabel}
       </div>
-      <svg viewBox="0 0 260 180" style={{ width: "100%", height: 150 }}>
+      <svg viewBox="0 0 260 150" style={{ width: "100%", height: 90, display: "block" }}>
         {Array.from({ length: yTicks + 1 }, (_, i) => {
-          const y = 10 + (1 - i / yTicks) * 140;
+          const y = 8 + (1 - i / yTicks) * 112;
           return (
             <g key={i}>
-              <line x1={40} y1={y} x2={250} y2={y} stroke="#dfe3e6" />
-              <text x={36} y={y + 3} fontSize="8" textAnchor="end">
+              <line x1={38} y1={y} x2={250} y2={y} stroke="#dfe3e6" />
+              <text x={34} y={y + 3} fontSize="7" textAnchor="end">
                 {((yMax * i) / yTicks).toLocaleString()}
               </text>
             </g>
           );
         })}
         {Array.from({ length: xTicks + 1 }, (_, i) => {
-          const x = 40 + (i / xTicks) * 210;
+          const x = 38 + (i / xTicks) * 212;
           return (
             <g key={i}>
-              <line x1={x} y1={10} x2={x} y2={150} stroke="#dfe3e6" />
-              <text x={x} y={162} fontSize="8" textAnchor="middle">
+              <line x1={x} y1={8} x2={x} y2={120} stroke="#dfe3e6" />
+              <text x={x} y={131} fontSize="7" textAnchor="middle">
                 {((xMax * i) / xTicks).toFixed(2)}
               </text>
             </g>
           );
         })}
-        <rect x={40} y={10} width={210} height={140} fill="none" stroke="#9aa4ab" />
+        <rect x={38} y={8} width={212} height={112} fill="none" stroke="#9aa4ab" />
       </svg>
-      <div style={{ textAlign: "center", fontSize: 9, fontWeight: 600 }}>{xLabel}</div>
+      <div style={{ textAlign: "center", fontSize: 8, fontWeight: 600 }}>{xLabel}</div>
     </div>
   );
 }
