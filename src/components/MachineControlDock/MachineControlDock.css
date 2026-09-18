@@ -65,8 +65,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #43a52f;
-  box-shadow: 0 0 3px #6bd94a;
+  background: #a01313;
+  box-shadow: 0 0 3px #d94a4a;
 }
 
 .mcd__live-label {
@@ -117,10 +117,10 @@
   border-radius: 4px;
   background: linear-gradient(
     to bottom,
-    #ecd94b 0%,
-    #cfe23f 28%,
-    #9bd63a 55%,
-    #6fae2e 100%
+    #ff9b9b 0%,
+    #d05e5e 28%,
+    #ac3131 55%,
+    #8f1616 100%
   );
   border: 1px solid #0b0d0c;
   box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.25);

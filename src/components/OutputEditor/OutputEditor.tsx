@@ -1,3 +1,9 @@
+import overviewIcon from "../../assets/output-overview.svg";
+import liveDataIcon from "../../assets/live-data.svg";
+import resultLimitsIcon from "../../assets/result-limits.svg";
+import graphingIcon from "../../assets/graphing.svg";
+import reportingIcon from "../../assets/reporting.svg";
+import dataExportingIcon from "../../assets/data-exporting.svg";
 import { useState } from "react";
 import type { CSSProperties } from "react";
 import GraphingPanel from "./GraphingPanel";
@@ -23,12 +29,36 @@ interface SubNavItem {
 }
 
 const SUB_NAV: SubNavItem[] = [
-  { id: "overview", label: "Output\nOverview", icon: "🖥" },
-  { id: "live-data", label: "Live\nData", icon: "🔢" },
-  { id: "result-limits", label: "Result\nLimits", icon: "📊" },
-  { id: "graphing", label: "Graphing", icon: "📈" },
-  { id: "reporting", label: "Reporting", icon: "🗎" },
-  { id: "data-exporting", label: "Data\nExporting", icon: "📤" },
+  {
+    id: "overview",
+    label: "Output\nOverview",
+    icon: overviewIcon,
+  },
+  {
+    id: "live-data",
+    label: "Live\nData",
+    icon: liveDataIcon,
+  },
+  {
+    id: "result-limits",
+    label: "Result\nLimits",
+    icon: resultLimitsIcon,
+  },
+  {
+    id: "graphing",
+    label: "Graphing",
+    icon: graphingIcon,
+  },
+  {
+    id: "reporting",
+    label: "Reporting",
+    icon: reportingIcon,
+  },
+  {
+    id: "data-exporting",
+    label: "Data\nExporting",
+    icon: dataExportingIcon,
+  },
 ];
 
 const ribbonStyle: CSSProperties = {
@@ -88,9 +118,16 @@ export default function OutputEditor({
             style={ribbonBtnStyle(subTab === item.id)}
             onClick={() => setSubTab(item.id)}
           >
-            <span style={{ fontSize: 15 }} aria-hidden>
-              {item.icon}
-            </span>
+            <img
+              src={item.icon}
+              alt=""
+              style={{
+                width: 22,
+                height: 22,
+                objectFit: "contain",
+                display: "block",
+              }}
+            />
             <span style={{ fontSize: 10, lineHeight: 1.15, textAlign: "center" }}>
               {item.label.split("\n").map((line, i) => (
                 <span key={i}>

@@ -4,6 +4,9 @@
   height: 100%;
   min-height: 0;
   gap: 4px;
+  background: #0f141d; /* Nền tối xanh đen HVU */
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #ffffff;
 }
 
 /* ---- Thanh Methods / Outputs / Results ---- */
@@ -13,8 +16,8 @@
   align-items: center;
   gap: 0;
   padding: 4px 6px;
-  background: #0e100c;
-  border-bottom: 1px solid #2c2f28;
+  background: #0a0d14;
+  border-bottom: 1px solid #283243;
 }
 
 .library-tools__category-tab {
@@ -24,7 +27,7 @@
   appearance: none;
   border: 1px solid transparent;
   background: transparent;
-  color: #c7cdbb;
+  color: #d0d7de;
   font-size: 12px;
   padding: 5px 14px;
   border-radius: 3px;
@@ -32,7 +35,7 @@
 }
 
 .library-tools__category-tab:hover {
-  background: #171a14;
+  background: #1c2433;
 }
 
 .library-tools__category-icon {
@@ -44,28 +47,28 @@
   font-size: 12px;
   font-weight: 700;
   border-radius: 3px;
-  color: #0d1206;
+  color: #ffffff;
 }
 
 .library-tools__category-icon--methods {
-  background: linear-gradient(180deg, #8fd13f 0%, #5c9a1f 100%);
+  background: linear-gradient(180deg, #1976d2 0%, #0d47a1 100%); /* Xanh Dương HVU */
 }
 
 .library-tools__category-icon--outputs {
-  background: linear-gradient(180deg, #b48fe6 0%, #7a4fc4 100%);
+  background: linear-gradient(180deg, #b71c1c 0%, #7f1d1d 100%); /* Đỏ Đô HVU */
 }
 
 .library-tools__category-icon--results {
-  background: linear-gradient(180deg, #f28fc9 0%, #c94f9e 100%);
+  background: linear-gradient(180deg, #00838f 0%, #006064 100%); /* Xanh Cyan Tối */
   font-style: italic;
   font-size: 9px;
 }
 
 .library-tools__category-tab--active {
-  background: #1a1d16;
-  border-color: #d9b23c;
-  box-shadow: 0 0 0 1px #d9b23c inset;
-  color: #f4ecc9;
+  background: #161b26;
+  border-color: #f4d03f;
+  box-shadow: 0 0 0 1px #f4d03f inset;
+  color: #ffffff;
 }
 
 .library-tools__stub {
@@ -75,19 +78,19 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background: #101210;
-  border: 1px solid #2c2f28;
+  background: #161b26;
+  border: 1px solid #283243;
   border-radius: 2px;
 }
 
 .library-tools__stub-title {
-  color: #cfd6c4;
+  color: #ffffff;
   font-size: 13px;
   font-weight: 600;
 }
 
 .library-tools__stub-hint {
-  color: #6b7362;
+  color: #90a4ae;
   font-size: 11px;
 }
 
@@ -98,8 +101,8 @@
   align-items: center;
   gap: 8px;
   padding: 4px 8px;
-  background: linear-gradient(180deg, #23291c 0%, #14170f 100%);
-  border: 1px solid #2c2f28;
+  background: linear-gradient(180deg, #1e2636 0%, #121824 100%);
+  border: 1px solid #283243;
   border-radius: 2px;
   overflow: hidden;
 }
@@ -107,9 +110,9 @@
 .library-tools__scroll-btn {
   flex: 0 0 auto;
   appearance: none;
-  border: 1px solid #3a3f34;
-  background: #1c2018;
-  color: #9aa38a;
+  border: 1px solid #36465e;
+  background: #17202e;
+  color: #90a4ae;
   font-size: 9px;
   width: 18px;
   height: 22px;
@@ -135,9 +138,9 @@
   align-items: center;
   gap: 6px;
   appearance: none;
-  border: 1px solid #3a3f34;
-  background: #1c2018;
-  color: #cfd6c4;
+  border: 1px solid #36465e;
+  background: #17202e;
+  color: #d0d7de;
   font-size: 10.5px;
   padding: 5px 10px;
   cursor: pointer;
@@ -146,19 +149,19 @@
 }
 
 .library-tools__subtab-icon {
-  color: #9be03a;
+  color: #64b5f6; /* Xanh Dương Nổi bật */
   font-size: 11px;
 }
 
 .library-tools__subtab--active {
-  background: linear-gradient(180deg, #2c3320 0%, #1a1d14 100%);
-  border-color: #cbe86a;
-  box-shadow: 0 0 0 1px #cbe86a inset;
-  color: #ecf2df;
+  background: linear-gradient(180deg, #1f2a3a 0%, #141c28 100%);
+  border-color: #f4d03f;
+  box-shadow: 0 0 0 1px #f4d03f inset;
+  color: #ffffff;
 }
 
 .library-tools__subtab--active .library-tools__subtab-icon {
-  color: #cbe86a;
+  color: #f4d03f;
 }
 
 .library-tools__subtab-close {
@@ -175,7 +178,7 @@
 
 .library-tools__subtab-close:hover {
   opacity: 1;
-  color: #e0473a;
+  color: #e53935;
   background: rgba(0, 0, 0, 0.25);
 }
 
@@ -190,9 +193,9 @@
 
 .library-tools__subtab-add {
   appearance: none;
-  border: 1px solid #3a3f34;
-  background: #171a14;
-  color: #9be03a;
+  border: 1px solid #36465e;
+  background: #121824;
+  color: #64b5f6;
   font-size: 13px;
   font-weight: 700;
   width: 24px;
@@ -208,8 +211,8 @@
   left: 0;
   flex-direction: column;
   min-width: 200px;
-  background: #171a14;
-  border: 1px solid #3a3f34;
+  background: #121824;
+  border: 1px solid #283243;
   border-radius: 3px;
   z-index: 5;
 }
@@ -218,7 +221,7 @@
   appearance: none;
   border: none;
   background: transparent;
-  color: #cfd6c4;
+  color: #d0d7de;
   font-size: 11px;
   text-align: left;
   padding: 7px 10px;
@@ -226,14 +229,14 @@
 }
 
 .library-tools__subtab-add-menu button:hover {
-  background: #2a3021;
-  color: #cbe86a;
+  background: #1c2433;
+  color: #64b5f6;
 }
 
 .library-tools__count {
   flex: 0 0 auto;
   font-size: 10.5px;
-  color: #cfd6c4;
+  color: #d0d7de;
   white-space: nowrap;
 }
 
@@ -243,15 +246,15 @@
   align-items: center;
   gap: 4px;
   font-size: 10px;
-  color: #cfd6c4;
+  color: #d0d7de;
   white-space: nowrap;
 }
 
 .library-tools__field input,
 .library-tools__field select {
-  background: #0e100d;
-  border: 1px solid #3a3f34;
-  color: #e4e8dc;
+  background: #0a0d14;
+  border: 1px solid #283243;
+  color: #ffffff;
   font-size: 10px;
   padding: 3px 6px;
   border-radius: 3px;
@@ -260,9 +263,9 @@
 .library-tools__help-btn {
   flex: 0 0 auto;
   appearance: none;
-  border: 1px solid #3a3f34;
-  background: #1c2018;
-  color: #9aa38a;
+  border: 1px solid #36465e;
+  background: #17202e;
+  color: #90a4ae;
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -281,9 +284,9 @@
 .library-tools__close-btn {
   flex: 0 0 auto;
   appearance: none;
-  border: 1px solid #3a3f34;
+  border: 1px solid #36465e;
   background: transparent;
-  color: #e0473a;
+  color: #e53935;
   font-size: 13px;
   font-weight: 700;
   width: 22px;
@@ -300,15 +303,15 @@
   gap: 6px;
   flex-wrap: wrap;
   padding: 6px 8px;
-  background: linear-gradient(180deg, #2b3222 0%, #171a13 100%);
-  border: 1px solid #2c2f28;
+  background: linear-gradient(180deg, #1e2636 0%, #121824 100%);
+  border: 1px solid #283243;
   border-radius: 2px;
 }
 
 .library-tools__divider {
   width: 1px;
   align-self: stretch;
-  background: #3a3f34;
+  background: #283243;
   margin: 0 2px;
 }
 
@@ -317,9 +320,9 @@
   align-items: center;
   gap: 4px;
   appearance: none;
-  border: 1px solid #3a3f34;
-  background: #1c2018;
-  color: #cfd6c4;
+  border: 1px solid #36465e;
+  background: linear-gradient(180deg, #253144 0%, #17202e 100%);
+  color: #ffffff;
   font-size: 10px;
   padding: 4px 8px;
   border-radius: 3px;
@@ -328,26 +331,29 @@
 }
 
 .library-tools__tool:hover {
-  background: #2a3021;
+  background: #2c3a50;
+  border-color: #1976d2;
 }
 
+/* Tool Active - Tông Đỏ Đô Thương Hiệu HVU */
 .library-tools__tool--active {
-  background: linear-gradient(180deg, #cbe86a 0%, #86b31d 100%);
-  color: #0d1206;
+  background: linear-gradient(180deg, #b71c1c 0%, #7f1d1d 100%);
+  border-color: #f4d03f;
+  color: #ffffff;
   font-weight: 600;
 }
 
 .library-tools__tool--active .library-tools__tool-icon {
-  color: #0d1206;
+  color: #ffffff;
 }
 
 .library-tools__tool-icon {
   font-size: 11px;
-  color: #9be03a;
+  color: #64b5f6;
 }
 
 .library-tools__tool-icon--danger {
-  color: #e0473a;
+  color: #e53935;
 }
 
 /* ---- Table ---- */
@@ -355,8 +361,8 @@
   flex: 1 1 auto;
   min-height: 0;
   overflow: auto;
-  background: #0a0c09;
-  border: 1px solid #2c2f28;
+  background: #0a0d14;
+  border: 1px solid #283243;
   border-radius: 2px;
 }
 
@@ -368,22 +374,22 @@
 .library-tools__table-wrap thead th {
   position: sticky;
   top: 0;
-  background: #1a1d16;
-  color: #a9b39a;
+  background: #121824;
+  color: #ffffff;
   font-size: 10px;
   font-weight: 600;
   text-align: left;
   padding: 5px 10px;
-  border-bottom: 1px solid #333;
+  border-bottom: 2px solid #1976d2;
   white-space: nowrap;
   z-index: 1;
 }
 
 .library-tools__table-wrap tbody td {
   font-size: 10.5px;
-  color: #e4e8dc;
+  color: #d0d7de;
   padding: 4px 10px;
-  border-bottom: 1px solid #17190f;
+  border-bottom: 1px solid #1f2838;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -391,7 +397,7 @@
 }
 
 .library-tools__table-wrap tbody td:nth-child(3) {
-  color: #4fd6dc;
+  color: #64b5f6; /* Xanh Dương Sáng cho dữ liệu chính */
 }
 
 .library-tools__table-wrap tbody tr {
@@ -399,31 +405,33 @@
 }
 
 .library-tools__table-wrap tbody tr:hover {
-  background: #171a14;
+  background: #1c2433;
 }
 
+/* Hàng được chọn (Selected Row) - Tông Xanh Dương Đen Nổi Bật */
 .library-tools__row--selected {
-  background: linear-gradient(180deg, #cbe86a 0%, #9dc430 100%) !important;
+  background: linear-gradient(180deg, #1976d2 0%, #0d47a1 100%) !important;
 }
 
 .library-tools__row--selected td,
 .library-tools__row--selected td:nth-child(3) {
-  color: #0d1206 !important;
+  color: #ffffff !important;
   font-weight: 600;
 }
 
+/* Hàng đang được sử dụng (In Use Row) - Tông Đỏ Đô HVU */
 .library-tools__row--inuse {
-  background: linear-gradient(180deg, #d99a3c 0%, #b56f1b 100%) !important;
+  background: linear-gradient(180deg, #b71c1c 0%, #7f1d1d 100%) !important;
 }
 
 .library-tools__row--inuse td,
 .library-tools__row--inuse td:nth-child(3) {
-  color: #2a1704 !important;
+  color: #ffffff !important;
   font-weight: 600;
 }
 
 .library-tools__col-inuse {
   width: 40px;
   text-align: center;
-  color: #9be03a;
+  color: #64b5f6;
 }

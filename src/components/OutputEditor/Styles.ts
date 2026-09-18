@@ -1,21 +1,23 @@
 import type { CSSProperties } from "react";
 
 export const colors = {
-  bodyBg: "#eef1f3",
-  panelBg: "#fff",
-  border: "#c3cad0",
-  headerBg: "#303a45",
-  headerText: "#e5e9ec",
-  ribbonBg1: "#3a4552",
-  ribbonBg2: "#29323c",
-  ribbonText: "#d7dde2",
-  ribbonActive: "#4c9a2a",
-  gold: "#cfa227",
-  selectedBarBg: "#232b34",
-  selectedBarText: "#e7c15a",
-  rowSelected: "#f0d989",
-  ghost: "#c7cdd2",
-  danger: "#cf5b63",
+  bodyBg: "#0f141d",           // Nền xám xanh đen sâu
+  panelBg: "#161b26",          // Nền panel xám tối
+  border: "#283243",           // Viền xanh xám công nghiệp
+  headerBg: "#b71c1c",         // Header Đỏ Đô ĐH Hùng Vương
+  headerText: "#ffffff",       // Chữ trắng nổi bật
+  ribbonBg1: "#1e2636",        // Thanh công cụ gradient xanh đen
+  ribbonBg2: "#121824",
+  ribbonText: "#d0d7de",       // Chữ xám trắng
+  ribbonActive: "#29b6f6",     // Xanh dương nhạt nổi bật (Highlight active)
+  accentRed: "#d32f2f",        // Đỏ thương hiệu HVU
+  accentBlue: "#1976d2",       // Xanh dương đậm HVU (Live data / Primary)
+  gold: "#f4d03f",             // Vàng điểm nhấn
+  selectedBarBg: "#1c2433",
+  selectedBarText: "#64b5f6",  // Chữ xanh dương sáng
+  rowSelected: "#1a2a40",      // Hàng được chọn (Xanh dương tối)
+  ghost: "#3a4659",            // Viền nhạt/disabled
+  danger: "#e53935",           // Đỏ cảnh báo / Emergency Stop
 };
 
 export const s = {
@@ -26,7 +28,7 @@ export const s = {
     minHeight: 0,
     minWidth: 0,
     background: colors.bodyBg,
-    color: "#1c2530",
+    color: colors.ribbonText,
     fontFamily: '"Segoe UI", Tahoma, Arial, sans-serif',
     fontSize: 12,
     boxSizing: "border-box",
@@ -42,16 +44,14 @@ export const s = {
   } as CSSProperties,
 
   panelHeader: {
-    background: colors.headerBg,
+    background: `linear-gradient(180deg, ${colors.headerBg} 0%, #8e1515 100%)`,
     color: colors.headerText,
     fontWeight: 600,
-    padding: "3px 8px",
+    padding: "4px 8px",
     fontSize: 12,
+    borderBottom: `1px solid ${colors.gold}`, // Điểm nhấn viền vàng kim
   } as CSSProperties,
 
-  // Chiếm toàn bộ chiều cao khả dụng: khối 2 cột (Requirements+Graph Preview /
-  // Graph Options) co giãn để vừa màn hình, Plots luôn cố định hiện bên dưới —
-  // không cần cuộn cả trang.
   stackCol: {
     display: "flex",
     flexDirection: "column",
@@ -62,7 +62,6 @@ export const s = {
     boxSizing: "border-box",
   } as CSSProperties,
 
-  // flex-grow 2 (twoColRow) : 1 (fullWidthPane) => xấp xỉ 2/3 : 1/3 chiều cao.
   twoColRow: {
     display: "flex",
     alignItems: "stretch",
@@ -73,8 +72,6 @@ export const s = {
     boxSizing: "border-box",
   } as CSSProperties,
 
-  // minHeight: 0 + overflowY: "auto" để mỗi cột tự cuộn riêng khi nội dung dài
-  // hơn chiều cao đang có, thay vì đẩy cả trang giãn ra.
   colPane: {
     flex: "1 1 0%",
     minWidth: 0,
@@ -87,8 +84,6 @@ export const s = {
     boxSizing: "border-box",
   } as CSSProperties,
 
-  // Plots: chiếm ~1/3 chiều cao còn lại (flex-grow 1, cân với twoColRow=2)
-  // và tự cuộn nội bộ nếu bảng dài hơn phần đang có.
   fullWidthPane: {
     flex: "1 1 0%",
     minHeight: 0,
@@ -105,7 +100,7 @@ export const s = {
     display: "flex",
     flexWrap: "wrap",
     gap: 4,
-    background: "#f4f6f7",
+    background: `linear-gradient(180deg, ${colors.ribbonBg1} 0%, ${colors.ribbonBg2} 100%)`,
     border: `1px solid ${colors.border}`,
     borderTop: "none",
     padding: 4,
@@ -113,9 +108,10 @@ export const s = {
   } as CSSProperties,
 
   toolbarBtn: {
-    background: "#eef1f3",
-    border: "1px solid #c3cad0",
-    padding: "4px 8px",
+    background: `linear-gradient(180deg, #253144 0%, #17202e 100%)`,
+    border: `1px solid #36465e`,
+    color: "#ffffff",
+    padding: "3px 8px",
     fontSize: 11,
     cursor: "pointer",
     borderRadius: 2,
@@ -125,40 +121,46 @@ export const s = {
     width: "100%",
     borderCollapse: "collapse",
     fontSize: 11,
+    color: colors.ribbonText,
   } as CSSProperties,
 
   th: {
-    background: "#e6eaed",
+    background: "#121824",
+    color: "#ffffff",
     textAlign: "left",
-    padding: "4px 6px",
-    borderBottom: `1px solid ${colors.border}`,
+    padding: "5px 6px",
+    borderBottom: `2px solid ${colors.accentBlue}`,
+    fontWeight: 600,
   } as CSSProperties,
 
   td: {
     padding: "4px 6px",
-    borderBottom: "1px solid #eceff1",
+    borderBottom: "1px solid #1f2838",
+    color: "#ffffff",
   } as CSSProperties,
 
   checkboxRow: {
     display: "flex",
     alignItems: "center",
     gap: 6,
-    padding: "1px 8px",
+    padding: "2px 8px",
     fontSize: 12,
     boxSizing: "border-box",
+    color: colors.ribbonText,
   } as CSSProperties,
 
   fieldRow: {
     display: "flex",
     alignItems: "center",
     gap: 6,
-    padding: "1px 8px",
+    padding: "2px 8px",
     minWidth: 0,
     boxSizing: "border-box",
   } as CSSProperties,
 
   fieldLabel: {
     flex: "0 0 100px",
+    color: "#90a4ae",
   } as CSSProperties,
 
   fieldInput: {
@@ -166,10 +168,13 @@ export const s = {
     minWidth: 0,
     width: "100%",
     fontSize: 12,
-    padding: "2px 4px",
-    border: "1px solid #b9c1c8",
+    padding: "2px 6px",
+    border: `1px solid ${colors.border}`,
     borderRadius: 2,
-    background: "#fff",
+    background: "#0a0d14",
+    color: "#64b5f6", // Màu chữ số Xanh Dương Đổi mới
+    fontFamily: '"Consolas", monospace',
+    fontWeight: "bold",
     boxSizing: "border-box",
   } as CSSProperties,
 
@@ -177,14 +182,16 @@ export const s = {
     display: "flex",
     gap: 2,
     padding: "4px 8px 0",
+    background: "#10141e",
     borderBottom: `1px solid ${colors.border}`,
     boxSizing: "border-box",
   } as CSSProperties,
 
   tab: (active: boolean): CSSProperties => ({
-    background: active ? "#fff" : "#dfe4e8",
-    border: "1px solid #b9c1c8",
-    borderBottom: active ? "1px solid #fff" : "none",
+    background: active ? colors.panelBg : "#18202c",
+    border: `1px solid ${colors.border}`,
+    borderBottom: active ? `1px solid ${colors.panelBg}` : "none",
+    color: active ? "#ffffff" : "#8294aa",
     padding: "4px 10px",
     fontSize: 11,
     cursor: "pointer",
@@ -193,6 +200,7 @@ export const s = {
     gap: 6,
     fontWeight: active ? 600 : 400,
     marginBottom: active ? -1 : 0,
+    borderTop: active ? `2px solid ${colors.accentRed}` : `1px solid ${colors.border}`,
   }),
 
   axisBlock: {
@@ -200,13 +208,15 @@ export const s = {
     minWidth: 0,
     border: `1px solid ${colors.border}`,
     borderRadius: 3,
-    padding: "3px 0",
+    background: "#111622",
+    padding: "4px 0",
     boxSizing: "border-box",
   } as CSSProperties,
 
   axisBlockTitle: {
     fontSize: 11,
     fontWeight: 600,
-    padding: "0 6px 2px",
+    color: "#64b5f6", // Xanh dương điểm nhấn
+    padding: "0 6px 4px",
   } as CSSProperties,
 };

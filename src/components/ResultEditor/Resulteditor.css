@@ -5,27 +5,27 @@
   min-height: 0;
   gap: 4px;
   font-family: "Segoe UI", Arial, sans-serif;
-  color: #e4e8dc;
+  color: #ffffff;
 }
 
 .result-editor__infobar {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 7px 10px;
-  background: linear-gradient(180deg, #23291c 0%, #14170f 100%);
-  border: 1px solid #2c2f28;
-  border-radius: 3px;
+  gap: 6px;
+  padding: 6px 10px;
+  background: linear-gradient(180deg, #1e2636 0%, #121824 100%);
+  border: 1px solid #283243;
+  border-radius: 2px;
   font-size: 11px;
 }
 
 .result-editor__infobar-label {
-  color: #9aa38a;
+  color: #90a4ae;
 }
 
 .result-editor__infobar-value {
-  color: #d9b23c;
+  color: #f4d03f; /* Điểm nhấn Vàng Kim HVU */
   font-weight: 600;
 }
 
@@ -33,166 +33,48 @@
   flex: 1 1 auto;
 }
 
-/* ---- Nút dùng chung (Load / Save / Save As / Insert / Reset Location...) ---- */
 .result-editor__tool {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   appearance: none;
-  border: 1px solid #3a3f34;
-  background: linear-gradient(180deg, #23271e 0%, #191d16 100%);
-  color: #cfd6c4;
-  font-size: 10.5px;
-  font-weight: 500;
-  padding: 5px 10px;
-  border-radius: 4px;
+  border: 1px solid #36465e;
+  background: #17202e;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 3px;
   cursor: pointer;
   white-space: nowrap;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 1px 2px rgba(0, 0, 0, 0.35);
-  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease,
-    transform 80ms ease, color 120ms ease;
 }
 
-.result-editor__tool:hover:not(:disabled) {
-  background: linear-gradient(180deg, #2d3324 0%, #20251a 100%);
-  border-color: #4c5640;
-  color: #e4e8dc;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 2px 5px rgba(0, 0, 0, 0.4);
-  transform: translateY(-1px);
-}
-
-.result-editor__tool:active:not(:disabled) {
-  transform: translateY(0);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4) inset;
-}
-
-.result-editor__tool:focus-visible {
-  outline: 2px solid #cbe86a;
-  outline-offset: 1px;
+.result-editor__tool:hover {
+  background: #253144;
+  border-color: #1976d2;
 }
 
 .result-editor__tool:disabled {
-  opacity: 0.4;
+  opacity: 0.45;
   cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
-/* Nút hành động chính (Save) — nổi bật bằng gradient olive-green thương hiệu */
-.result-editor__tool--primary {
-  background: linear-gradient(180deg, #cbe86a 0%, #86b31d 100%);
-  border-color: #86b31d;
-  color: #0d1206;
-  font-weight: 700;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.35) inset, 0 2px 4px rgba(0, 0, 0, 0.35);
-}
-
-.result-editor__tool--primary:hover:not(:disabled) {
-  background: linear-gradient(180deg, #d7f184 0%, #96c624 100%);
-  border-color: #96c624;
-  color: #0d1206;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.45) inset, 0 3px 7px rgba(0, 0, 0, 0.4);
-}
-
-.result-editor__tool--primary:active:not(:disabled) {
-  background: linear-gradient(180deg, #b9d95c 0%, #79a119 100%);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35) inset;
-}
-
-/* Nút hành động phụ nổi bật hơn mức mặc định (Insert, Select All khi chưa chọn hết) */
-.result-editor__tool--accent {
-  border-color: #6d8c22;
-  color: #d7f184;
-}
-
-.result-editor__tool--accent:hover:not(:disabled) {
-  border-color: #86b31d;
-  background: linear-gradient(180deg, #2c3620 0%, #1e2617 100%);
-  color: #eaffb0;
 }
 
 .result-editor__tool-icon {
-  font-size: 12px;
-  line-height: 1;
-  display: inline-flex;
+  font-size: 11px;
+  color: #64b5f6; /* Xanh Dương Sáng HVU */
 }
 
 .result-editor__tool-icon--danger {
-  color: #e0473a;
+  color: #e53935; /* Đỏ Cảnh Báo HVU */
 }
 
-/* ---- Công tắc bật/tắt Standard Result (thay cho checkbox thô) ---- */
-.result-editor__switch-row {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 10.5px;
-  color: #a9b39a;
-  cursor: pointer;
-  user-select: none;
-}
-
-.result-editor__switch {
-  position: relative;
-  display: inline-flex;
-  width: 30px;
-  height: 16px;
-  flex: 0 0 auto;
-}
-
-.result-editor__switch input {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  margin: 0;
-  cursor: pointer;
-}
-
-.result-editor__switch-track {
-  position: absolute;
-  inset: 0;
-  background: #2a2f24;
-  border: 1px solid #3a3f34;
-  border-radius: 999px;
-  transition: background 150ms ease, border-color 150ms ease;
-}
-
-.result-editor__switch-thumb {
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #8a9280;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  transition: transform 150ms ease, background 150ms ease;
-}
-
-.result-editor__switch input:checked ~ .result-editor__switch-track {
-  background: linear-gradient(180deg, #cbe86a 0%, #86b31d 100%);
-  border-color: #86b31d;
-}
-
-.result-editor__switch input:checked ~ .result-editor__switch-track .result-editor__switch-thumb {
-  transform: translateX(14px);
-  background: #0d1206;
-}
-
-.result-editor__switch input:focus-visible ~ .result-editor__switch-track {
-  outline: 2px solid #cbe86a;
-  outline-offset: 2px;
-}
-
-/* ---- Ribbon 3 tab (Base Information / Result Type / Output Selection) ---- */
 .result-editor__ribbon {
   flex: 0 0 auto;
   display: flex;
-  gap: 5px;
-  padding: 7px 8px;
-  background: #14170f;
-  border: 1px solid #2c2f28;
-  border-radius: 3px;
+  gap: 4px;
+  padding: 6px 8px;
+  background: #121824;
+  border: 1px solid #283243;
+  border-radius: 2px;
   overflow-x: auto;
 }
 
@@ -204,34 +86,23 @@
   appearance: none;
   border: 1px solid transparent;
   background: transparent;
-  color: #a9b39a;
+  color: #90a4ae;
   font-size: 9.5px;
-  padding: 6px 12px;
-  border-radius: 4px;
+  padding: 5px 10px;
+  border-radius: 3px;
   cursor: pointer;
   white-space: nowrap;
   text-align: center;
-  transition: background 120ms ease, transform 80ms ease, box-shadow 120ms ease, color 120ms ease;
 }
 
 .result-editor__ribbon-item:hover {
-  background: #1f251a;
-  color: #cfd6c4;
-}
-
-.result-editor__ribbon-item:active {
-  transform: translateY(1px);
-}
-
-.result-editor__ribbon-item:focus-visible {
-  outline: 2px solid #cbe86a;
-  outline-offset: 1px;
+  background: #1c2433;
+  color: #ffffff;
 }
 
 .result-editor__ribbon-icon {
   font-size: 15px;
-  color: #9be03a;
-  transition: color 120ms ease;
+  color: #64b5f6; /* Xanh Dương Sáng HVU */
 }
 
 .result-editor__ribbon-label {
@@ -240,21 +111,16 @@
   line-height: 1.15;
 }
 
+/* Tab Ribbon Active: Gradient Đỏ Đô Thương Hiệu HVU & Viền Vàng Kim */
 .result-editor__ribbon-item--active {
-  background: linear-gradient(180deg, #cbe86a 0%, #86b31d 100%);
-  border-color: #86b31d;
-  color: #0d1206;
-  font-weight: 700;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.35) inset, 0 2px 6px rgba(0, 0, 0, 0.35);
-}
-
-.result-editor__ribbon-item--active:hover {
-  background: linear-gradient(180deg, #d7f184 0%, #96c624 100%);
-  color: #0d1206;
+  background: linear-gradient(180deg, #b71c1c 0%, #7f1d1d 100%);
+  border-color: #f4d03f;
+  color: #ffffff;
+  font-weight: 600;
 }
 
 .result-editor__ribbon-item--active .result-editor__ribbon-icon {
-  color: #0d1206;
+  color: #ffffff;
 }
 
 .result-editor__scroll {
@@ -269,8 +135,8 @@
 
 .result-editor__section {
   flex: 0 0 auto;
-  background: #101210;
-  border: 1px solid #2c2f28;
+  background: #121824;
+  border: 1px solid #283243;
   border-radius: 2px;
   padding: 10px 12px;
   scroll-margin-top: 6px;
@@ -279,14 +145,14 @@
 .result-editor__section-title {
   margin: 0 0 8px;
   font-size: 12px;
-  color: #cbe86a;
+  color: #64b5f6; /* Tiêu đề section màu Xanh Dương Sáng HVU */
   font-weight: 600;
-  border-bottom: 1px solid #2c2f28;
+  border-bottom: 1px solid #283243;
   padding-bottom: 6px;
 }
 
 .result-editor__hint {
-  color: #6b7362;
+  color: #90a4ae;
   font-size: 11px;
   margin: 0 0 8px;
 }
@@ -302,7 +168,7 @@
   flex-direction: column;
   gap: 3px;
   font-size: 10.5px;
-  color: #cfd6c4;
+  color: #d0d7de;
   min-width: 150px;
 }
 
@@ -313,26 +179,24 @@
 .result-editor__field-grid input,
 .result-editor__field-grid textarea,
 .result-editor__field-grid select {
-  background: #0e100d;
-  border: 1px solid #3a3f34;
-  color: #e4e8dc;
+  background: #0a0d14;
+  border: 1px solid #36465e;
+  color: #ffffff;
   font-size: 10.5px;
   padding: 4px 6px;
   border-radius: 3px;
-  transition: border-color 120ms ease, box-shadow 120ms ease;
 }
 
 .result-editor__field-grid input:focus,
 .result-editor__field-grid textarea:focus,
 .result-editor__field-grid select:focus {
+  border-color: #1976d2;
   outline: none;
-  border-color: #86b31d;
-  box-shadow: 0 0 0 2px rgba(155, 224, 58, 0.25);
 }
 
 .result-editor__readonly {
-  color: #8a9280 !important;
-  background: #0a0b09 !important;
+  color: #6c7a89 !important;
+  background: #06080d !important;
   cursor: default;
 }
 
@@ -341,16 +205,8 @@
   align-items: center;
   gap: 6px;
   font-size: 10.5px;
-  color: #cfd6c4;
+  color: #d0d7de;
   margin: 6px 0;
-}
-
-.result-editor__checkbox input[type="checkbox"],
-.result-editor__param-table input[type="radio"] {
-  accent-color: #9be03a;
-  width: 13px;
-  height: 13px;
-  cursor: pointer;
 }
 
 .result-editor__checkbox--aligned {
@@ -366,29 +222,22 @@
 
 .result-editor__mini-table th {
   text-align: left;
-  color: #a9b39a;
+  color: #90a4ae;
   font-weight: 600;
   padding: 4px 8px;
-  border-bottom: 1px solid #2c2f28;
+  border-bottom: 1px solid #283243;
 }
 
 .result-editor__mini-table td {
   padding: 4px 8px;
-  border-bottom: 1px solid #1a1d16;
-}
-
-.result-editor__mini-table input[type="checkbox"] {
-  accent-color: #9be03a;
-  width: 13px;
-  height: 13px;
-  cursor: pointer;
+  border-bottom: 1px solid #1c2433;
 }
 
 .result-editor__order-input {
   width: 48px;
-  background: #0e100d;
-  border: 1px solid #3a3f34;
-  color: #e4e8dc;
+  background: #0a0d14;
+  border: 1px solid #36465e;
+  color: #ffffff;
   font-size: 10.5px;
   padding: 3px 5px;
   border-radius: 3px;
@@ -402,20 +251,13 @@
 }
 
 .result-editor__search {
-  background: #0e100d;
-  border: 1px solid #3a3f34;
-  color: #e4e8dc;
+  background: #0a0d14;
+  border: 1px solid #36465e;
+  color: #ffffff;
   font-size: 10.5px;
-  padding: 5px 9px;
-  border-radius: 4px;
+  padding: 4px 8px;
+  border-radius: 3px;
   min-width: 180px;
-  transition: border-color 120ms ease, box-shadow 120ms ease;
-}
-
-.result-editor__search:focus {
-  outline: none;
-  border-color: #86b31d;
-  box-shadow: 0 0 0 2px rgba(155, 224, 58, 0.25);
 }
 
 .result-editor__param-table {
@@ -427,35 +269,31 @@
 
 .result-editor__param-table th {
   text-align: left;
-  color: #a9b39a;
+  color: #90a4ae;
   font-weight: 600;
   padding: 4px 6px;
-  border-bottom: 1px solid #2c2f28;
+  border-bottom: 1px solid #283243;
 }
 
 .result-editor__param-table td {
   padding: 3px 6px;
-  border-bottom: 1px solid #1a1d16;
+  border-bottom: 1px solid #1c2433;
   cursor: pointer;
 }
 
 .result-editor__param-table input,
 .result-editor__param-table select {
   width: 100%;
-  background: #0e100d;
-  border: 1px solid #3a3f34;
-  color: #e4e8dc;
+  background: #0a0d14;
+  border: 1px solid #36465e;
+  color: #ffffff;
   font-size: 10.5px;
   padding: 3px 5px;
   border-radius: 3px;
 }
 
 .result-editor__param-row--selected {
-  background: #1a1a10;
-}
-
-.result-editor__param-row--selected td {
-  border-bottom-color: #3a3f22;
+  background: #1c2433;
 }
 
 .result-editor__formula-field {
@@ -466,15 +304,15 @@
   flex: 1 1 auto;
   font-family: "Consolas", "Courier New", monospace;
   font-size: 12px;
-  background: #0e100d;
-  border: 1px solid #3a3f34;
-  color: #cbe86a;
+  background: #0a0d14;
+  border: 1px solid #36465e;
+  color: #64b5f6; /* Công thức hiển thị màu Xanh Dương Sáng HVU */
   padding: 6px 8px;
   border-radius: 3px;
 }
 
 .result-editor__error {
-  color: #e0473a;
+  color: #e53935; /* Màu lỗi Đỏ Cảnh Báo HVU */
   font-size: 10.5px;
   margin: -4px 0 8px;
 }
@@ -489,11 +327,16 @@
 
 .result-editor__type-label {
   font-size: 12px;
-  color: #d9b23c;
+  color: #f4d03f; /* Màu nhãn Vàng Kim HVU */
+}
+
+.result-editor__demo-toggle {
+  font-size: 10px;
+  color: #90a4ae;
 }
 
 .result-editor__warning {
-  color: #d9b23c;
+  color: #f4d03f;
   font-style: italic;
   font-size: 11px;
   margin: 0 0 8px;
@@ -505,46 +348,30 @@ fieldset.result-editor__box:disabled {
 }
 
 .result-editor__box:disabled legend {
-  color: #6b7362;
+  color: #90a4ae;
 }
 
-/* ---- Nhóm nút chuyển đổi kiểu segmented control (Specified / Force) ---- */
 .result-editor__toggle-group {
-  display: inline-flex;
-  gap: 0;
-  border: 1px solid #3a3f34;
-  border-radius: 5px;
-  overflow: hidden;
-  background: #14170f;
+  display: flex;
+  gap: 4px;
 }
 
 .result-editor__toggle-btn {
   appearance: none;
-  border: none;
-  background: transparent;
-  color: #a9b39a;
+  border: 1px solid #36465e;
+  background: #17202e;
+  color: #ffffff;
   font-size: 10.5px;
-  font-weight: 500;
-  padding: 5px 14px;
+  padding: 4px 10px;
+  border-radius: 3px;
   cursor: pointer;
-  transition: background 120ms ease, color 120ms ease;
-  position: relative;
-}
-
-.result-editor__toggle-btn + .result-editor__toggle-btn {
-  border-left: 1px solid #3a3f34;
-}
-
-.result-editor__toggle-btn:hover:not(.result-editor__toggle-btn--active) {
-  background: #1f251a;
-  color: #cfd6c4;
 }
 
 .result-editor__toggle-btn--active {
-  background: linear-gradient(180deg, #cbe86a 0%, #86b31d 100%);
-  color: #0d1206;
-  font-weight: 700;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.35) inset;
+  background: linear-gradient(180deg, #b71c1c 0%, #7f1d1d 100%);
+  color: #ffffff;
+  font-weight: 600;
+  border-color: #f4d03f;
 }
 
 .result-editor__hint--tight {
@@ -555,7 +382,7 @@ fieldset.result-editor__box:disabled {
   flex: 0 0 auto;
   text-align: center;
   padding: 4px;
-  color: #3a3f34;
+  color: #283243;
   font-size: 10px;
   letter-spacing: 0.5px;
 }
