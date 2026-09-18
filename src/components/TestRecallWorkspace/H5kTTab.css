@@ -1,3 +1,10 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
 .h5kt-tab {
   width: 100%;
   height: 100%;
@@ -44,9 +51,9 @@
   cursor: pointer;
 }
 
-/* MAIN TOP WORKSPACE LAYOUT */
+/* MAIN TOP WORKSPACE LAYOUT - chiếm phần còn lại, đẩy Testing xuống đáy */
 .h5kt-top-content {
-  flex: 1 1 55%;
+  flex: 1 1 auto;
   display: flex;
   gap: 4px;
   min-height: 0;
@@ -248,6 +255,21 @@
   border-radius: 2px;
 }
 
+/* BOTTOM RESULTS AREA - đẩy xuống cuối cùng.
+   Chiều cao cố định = toolbar ngoài (h5kt-results__toolbar) + toolbar trong của
+   SpecimenTable (specimen-table__toolbar, 27px) + 1 dòng header + 4 dòng dữ liệu.
+   Nếu SpecimenTable đổi chiều cao dòng/toolbar, chỉnh lại các biến bên dưới. */
+.h5kt-results {
+  flex: 0 0 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  --outer-toolbar-h: 28px;
+  --inner-toolbar-h: 27px;
+  --row-h: 26px;
+  height: calc(var(--outer-toolbar-h) + var(--inner-toolbar-h) + (var(--row-h) * 5));
+}
+
 /* RESULTS TOOLBAR DÀNH CHO H5KTTAB.CSS */
 .h5kt-results__toolbar {
   flex: 0 0 28px !important;
@@ -277,4 +299,49 @@
 
 .h5kt-results__tools button:hover {
   background: #4a523f !important;
+}
+
+/* BẢNG KẾT QUẢ - CHỈ HIỂN THỊ 4 DÒNG, PHẦN CÒN LẠI CUỘN */
+.h5kt-results__table-wrapper {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.h5kt-results__table-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.h5kt-results__table-wrapper thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #23261f;
+}
+
+/* Thanh cuộn theo phong cách tối của giao diện */
+.h5kt-results__table-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.h5kt-results__table-wrapper::-webkit-scrollbar-track {
+  background: #181a16;
+}
+
+.h5kt-results__table-wrapper::-webkit-scrollbar-thumb {
+  background: #4a503f;
+  border-radius: 4px;
+}
+
+.h5kt-results__table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #5c6350;
+}
+
+/* Firefox */
+.h5kt-results__table-wrapper {
+  scrollbar-width: thin;
+  scrollbar-color: #4a503f #181a16;
 }
