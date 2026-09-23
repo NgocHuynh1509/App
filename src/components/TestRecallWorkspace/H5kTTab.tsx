@@ -49,19 +49,13 @@ export default function H5kTTab({ liveData, curve, specimens, onRegenerate }: Pr
 
     return () => clearInterval(intervalId);
   }, []);
-    // ----- Δx: state + 2 hàm random riêng, độc lập với ε -----
-  const [deltaX, setDeltaX] = useState(() => Math.random());
+  // ----- Δx: tăng dần liên tục, không giới hạn, không reset theo specimen -----
+  const [deltaX, setDeltaX] = useState(0);
 
-  // Hàm random #1: random lại Δx mỗi khi specimen đang chạy đổi (sweep mới)
-  useEffect(() => {
-    setDeltaX(Math.random());
-  }, [activeId]);
-
-  // Hàm random #2: cập nhật Δx định kỳ, độc lập tốc độ với ε (1.5s)
   useEffect(() => {
     const deltaXIntervalId = setInterval(() => {
-      setDeltaX(Math.random());
-    }, 1500); // tốc độ khác epsilon để 2 giá trị không đồng bộ
+      setDeltaX((prev) => prev + Math.random() * 0.5);
+    }, 1500);
 
     return () => clearInterval(deltaXIntervalId);
   }, []);
