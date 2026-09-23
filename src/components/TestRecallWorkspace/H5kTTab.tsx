@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import type { LiveData, GraphPoint, Specimen } from "../../types";
 import GraphPanel from "../GraphPanel/GraphPanel";
 import SpecimenTable from "../SpecimenTable/SpecimenTable";
@@ -10,7 +11,42 @@ interface Props {
   onRegenerate?: () => void;
 }
 
+// Quy đổi đơn vị dùng chung cho khối tính σ / ε bên dưới.
+const IN_TO_MM = 25.4;
+const IN2_TO_MM2 = IN_TO_MM * IN_TO_MM; // 1 in² = 645.16 mm²
+const LBF_TO_N = 4.44822;
+
 export default function H5kTTab({ liveData, curve, specimens, onRegenerate }: Props) {
+  // Mẫu đang chạy hiện tại luôn là phần tử cuối cùng trong specimens
+  // (đang ở trạng thái "Before Test"/"New" cho tới khi sweep hoàn tất).
+  const activeSpecimen = specimens[specimens.length - 1];
+
+  // σ (ứng suất tức thời) = Force / Area, quy về MPa (N/mm²) cho đúng
+  // định nghĩa vật lý của MPa, thay vì psi/ksi như cột Stress cũ.
+  const areaMm2 = (activeSpecimen?.area ?? 0) * IN2_TO_MM2;
+  const forceN = liveData.force * LBF_TO_N;
+  const sigma = areaMm2 > 0 ? forceN / areaMm2 : 0;
+
+  // ε = độ dịch chuyển LŨY KẾ kể từ khi mẫu (specimen) hiện tại bắt đầu
+  // test, quy đổi sang mm (nhãn hiển thị dùng ký hiệu epsilon "ε" thay cho
+  // "Δx" cũ, giá trị/đơn vị giữ nguyên như trước). Mỗi khi specimen đang
+  // chạy đổi (sweep mới), mốc bắt đầu được ghi lại lại từ đầu nên ε tăng
+  // dần liên tục rồi reset về gần 0 khi sang mẫu kế tiếp — khác với vị trí
+  // tức thời (hiệu 2 điểm liên tiếp) vốn luôn bằng đúng 1 bước cố định nên
+  // trông như đứng yên.
+  const activeId = activeSpecimen?.id;
+  const startPositionRef = useRef(liveData.position);
+  const prevActiveIdRef = useRef(activeId);
+
+  useEffect(() => {
+    if (prevActiveIdRef.current !== activeId) {
+      prevActiveIdRef.current = activeId;
+      startPositionRef.current = liveData.position;
+    }
+  }, [activeId, liveData.position]);
+
+  const epsilon = (liveData.position - startPositionRef.current) * IN_TO_MM;
+
   return (
     <div className="h5kt-tab">
       {/* MACHINE STATUS LINE */}
@@ -157,6 +193,32 @@ export default function H5kTTab({ liveData, curve, specimens, onRegenerate }: Pr
                 <span className="h5kt-live-label">Position Rate</span>
                 <input type="text" readOnly value={liveData.positionRate.toFixed(0)} />
                 <span className="h5kt-live-unit">in/min</span>
+              </div>
+            </div>
+          </section>
+
+          {/* SIGMA / EPSILON — panel riêng với các hàng giãn đầy (flex:1) để
+              chữ số phóng to lấp kín khoảng trống còn lại của cột sidebar,
+              thay vì dùng .h5kt-live-row (vốn có height cố định 24px). */}
+          <section className="h5kt-panel h5kt-sigma-eps-panel">
+            <div className="h5kt-panel-header">
+              <span>σ / ε</span>
+              <div className="h5kt-panel-actions">
+                <button title="Minimize">_</button>
+                <button title="Close">✕</button>
+              </div>
+            </div>
+            <div className="h5kt-sigma-eps-body">
+              <div className="h5kt-sigma-eps-row">
+                <span className="h5kt-sigma-eps-label">ε</span>
+                <span className="h5kt-sigma-eps-value">{sigma.toFixed(4)}</span>
+                <span className="h5kt-sigma-eps-unit">MPa</span>
+              </div>
+
+              <div className="h5kt-sigma-eps-row">
+                <span className="h5kt-sigma-eps-label">Δx</span>
+                <span className="h5kt-sigma-eps-value">{epsilon.toFixed(4)}</span>
+                <span className="h5kt-sigma-eps-unit">mm</span>
               </div>
             </div>
           </section>

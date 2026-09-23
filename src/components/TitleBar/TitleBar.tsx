@@ -11,11 +11,7 @@ export default function TitleBar() {
         <span className="title-bar__app-name">Materials Analysis</span>
       </div>
 
-      <div className="title-bar__window-controls">
-        <button className="title-bar__btn title-bar__btn--minimize" aria-label="Minimize" />
-        <button className="title-bar__btn title-bar__btn--maximize" aria-label="Maximize" />
-        <button className="title-bar__btn title-bar__btn--close" aria-label="Close" />
-      </div>
+      
     </header>
   );
 }

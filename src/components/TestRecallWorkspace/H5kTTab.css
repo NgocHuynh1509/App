@@ -255,6 +255,65 @@ body,
   border-radius: 2px;
 }
 
+/* SIGMA / EPSILON PANEL — nhận hết phần không gian còn lại của sidebar
+   (flex: 1 1 auto, giống Live Data) nhưng KHÔNG dùng .h5kt-live-row (có
+   height cố định 24px) mà dùng các hàng flex:1 riêng để 2 giá trị σ và ε
+   giãn to, lấp khít chiều cao còn trống của panel. */
+.h5kt-sigma-eps-panel {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.h5kt-sigma-eps-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px;
+  background: #11130f;
+  min-height: 0;
+}
+
+.h5kt-sigma-eps-row {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1a1d17;
+  border: 1px solid #292e22;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.h5kt-sigma-eps-label {
+  flex: 0 0 auto;
+  font-size: clamp(1.4rem, 3.2vw, 2.1rem);
+  font-weight: 700;
+  font-style: italic;
+  color: #72b41c;
+}
+
+.h5kt-sigma-eps-value {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: right;
+  font-family: "Consolas", monospace;
+  font-size: clamp(1.6rem, 4.2vw, 2.6rem);
+  font-weight: 700;
+  color: #79f82e;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.h5kt-sigma-eps-unit {
+  flex: 0 0 auto;
+  font-size: 0.9rem;
+  color: #6a7360;
+}
+
 /* BOTTOM RESULTS AREA - đẩy xuống cuối cùng.
    Chiều cao cố định = toolbar ngoài (h5kt-results__toolbar) + toolbar trong của
    SpecimenTable (specimen-table__toolbar, 27px) + 1 dòng header + 4 dòng dữ liệu.

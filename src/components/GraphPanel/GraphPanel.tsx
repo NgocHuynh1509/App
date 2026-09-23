@@ -14,6 +14,10 @@ const VISIBLE_POINT_COUNT = 60;
 const PADDING = { top: 20, right: 30, bottom: 60, left: 70 };
 const MIN_RANGE_SPAN = 200;
 
+// Dữ liệu gốc (position) đang tính theo inch — quy đổi sang mm để hiển thị.
+const IN_TO_MM = 25.4;
+const toMm = (inches: number) => inches * IN_TO_MM;
+
 function buildSmoothPath(coords: { x: number; y: number }[]): string {
   if (coords.length === 0) return "";
   if (coords.length === 1) {
@@ -57,9 +61,13 @@ export default function GraphPanel({ data = [] }: GraphPanelProps) {
 
   // Luôn chỉ lấy N điểm CUỐI CÙNG — bất kể data dài bao nhiêu,
   // đây chính là thứ khiến đồ thị "chạy mãi không dừng".
+  // Quy đổi position từ inch sang mm ngay tại đây để toàn bộ phần
+  // tính toán bên dưới (range, tick, path) đều làm việc trên mm.
   const visiblePoints = useMemo(() => {
-    if (data.length <= VISIBLE_POINT_COUNT) return data;
-    return data.slice(data.length - VISIBLE_POINT_COUNT);
+    const windowed = data.length <= VISIBLE_POINT_COUNT
+      ? data
+      : data.slice(data.length - VISIBLE_POINT_COUNT);
+    return windowed.map((p) => ({ ...p, position: toMm(p.position) }));
   }, [data]);
 
   const visibleRange = useMemo(() => {
@@ -150,7 +158,7 @@ export default function GraphPanel({ data = [] }: GraphPanelProps) {
               <g key={`y-${i}`}>
                 <line x1={PADDING.left} x2={width - PADDING.right} y1={y} y2={y} className="graph-panel__gridline" />
                 <text x={PADDING.left - 10} y={y + 4} className="graph-panel__tick graph-panel__tick--y">
-                  {Math.round(value).toLocaleString()}
+                  {value.toFixed(4)}
                 </text>
               </g>
             );
@@ -162,7 +170,7 @@ export default function GraphPanel({ data = [] }: GraphPanelProps) {
               <g key={`x-${index}`}>
                 <line x1={x} x2={x} y1={PADDING.top} y2={height - PADDING.bottom} className="graph-panel__gridline" />
                 <text x={x} y={height - PADDING.bottom + 18} textAnchor="middle" className="graph-panel__tick graph-panel__tick--x">
-                  {value.toFixed(3)}
+                  {value.toFixed(4)}
                 </text>
               </g>
             );
@@ -186,7 +194,7 @@ export default function GraphPanel({ data = [] }: GraphPanelProps) {
             Force (lbf)
           </text>
           <text x={PADDING.left + plotW / 2} y={height - 12} className="graph-panel__axis-label" textAnchor="middle">
-            Position (in)
+            Position (mm)
           </text>
         </svg>
       </div>
