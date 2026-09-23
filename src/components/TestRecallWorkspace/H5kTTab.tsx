@@ -1,5 +1,4 @@
-import { useEffect, useRef } from "react";
-import type { LiveData, GraphPoint, Specimen } from "../../types";
+import { useEffect, useState } from "react";import type { LiveData, GraphPoint, Specimen } from "../../types";
 import GraphPanel from "../GraphPanel/GraphPanel";
 import SpecimenTable from "../SpecimenTable/SpecimenTable";
 import "./H5kTTab.css";
@@ -35,17 +34,37 @@ export default function H5kTTab({ liveData, curve, specimens, onRegenerate }: Pr
   // tức thời (hiệu 2 điểm liên tiếp) vốn luôn bằng đúng 1 bước cố định nên
   // trông như đứng yên.
   const activeId = activeSpecimen?.id;
-  const startPositionRef = useRef(liveData.position);
-  const prevActiveIdRef = useRef(activeId);
+  const [epsilon, setEpsilon] = useState(() => Math.random());
 
+  // Random lại giá trị ε mỗi khi specimen đang chạy đổi (sweep mới)
   useEffect(() => {
-    if (prevActiveIdRef.current !== activeId) {
-      prevActiveIdRef.current = activeId;
-      startPositionRef.current = liveData.position;
-    }
-  }, [activeId, liveData.position]);
+    setEpsilon(Math.random());
+  }, [activeId]);
 
-  const epsilon = (liveData.position - startPositionRef.current) * IN_TO_MM;
+  // Cập nhật ε định kỳ để mô phỏng dữ liệu "live" (0–1)
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setEpsilon(Math.random());
+    }, 1000); // đổi 1000ms nếu muốn nhanh/chậm hơn
+
+    return () => clearInterval(intervalId);
+  }, []);
+    // ----- Δx: state + 2 hàm random riêng, độc lập với ε -----
+  const [deltaX, setDeltaX] = useState(() => Math.random());
+
+  // Hàm random #1: random lại Δx mỗi khi specimen đang chạy đổi (sweep mới)
+  useEffect(() => {
+    setDeltaX(Math.random());
+  }, [activeId]);
+
+  // Hàm random #2: cập nhật Δx định kỳ, độc lập tốc độ với ε (1.5s)
+  useEffect(() => {
+    const deltaXIntervalId = setInterval(() => {
+      setDeltaX(Math.random());
+    }, 1500); // tốc độ khác epsilon để 2 giá trị không đồng bộ
+
+    return () => clearInterval(deltaXIntervalId);
+  }, []);
 
   return (
     <div className="h5kt-tab">
@@ -211,13 +230,13 @@ export default function H5kTTab({ liveData, curve, specimens, onRegenerate }: Pr
             <div className="h5kt-sigma-eps-body">
               <div className="h5kt-sigma-eps-row">
                 <span className="h5kt-sigma-eps-label">ε</span>
-                <span className="h5kt-sigma-eps-value">{sigma.toFixed(4)}</span>
+                <span className="h5kt-sigma-eps-value">{epsilon.toFixed(4)}</span>
                 <span className="h5kt-sigma-eps-unit">MPa</span>
               </div>
 
               <div className="h5kt-sigma-eps-row">
                 <span className="h5kt-sigma-eps-label">Δx</span>
-                <span className="h5kt-sigma-eps-value">{epsilon.toFixed(4)}</span>
+                <span className="h5kt-sigma-eps-value">{deltaX.toFixed(4)}</span>
                 <span className="h5kt-sigma-eps-unit">mm</span>
               </div>
             </div>
