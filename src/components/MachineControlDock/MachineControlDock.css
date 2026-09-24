@@ -4,15 +4,17 @@
   flex-direction: column;
   align-items: center;
   min-height: 0;
+  height: 100%;
+  box-sizing: border-box;
   background: linear-gradient(180deg, #14170f 0%, #0a0c08 100%);
   border-right: 2px solid #2c2f28;
-  padding: 10px 8px 14px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  gap: 7px;
+  padding: 6px 8px 8px;
+  overflow: hidden; /* không còn thanh cuộn */
+  gap: 4px;
 }
 
 .mcd__header {
+  flex: 0 0 auto;
   width: 100%;
   display: flex;
   align-items: center;
@@ -43,15 +45,15 @@
 }
 
 .mcd__info {
+  flex: 0 0 auto;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
   font-size: 10px;
   color: #9aa294;
-  padding-bottom: 7px;
+  padding-bottom: 4px;
   border-bottom: 1px solid #22261c;
-  margin-bottom: 3px;
 }
 
 .mcd__info-row {
@@ -70,23 +72,27 @@
 }
 
 .mcd__live-label {
+  flex: 0 0 auto;
   width: 100%;
   text-align: center;
   font-size: 11px;
   font-weight: 600;
   color: #cfd6c4;
-  margin-bottom: 3px;
 }
 
+/* Vùng slider: chiếm phần cao còn lại, thanh trượt tự co giãn */
 .mcd__slider-area {
+  flex: 1 1 auto;
+  min-height: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 9px;
+  gap: 5px;
 }
 
 .mcd__max-speed {
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -103,6 +109,7 @@
 }
 
 .mcd__fixed-jog {
+  flex: 0 0 auto;
   width: 100%;
   text-align: center;
   font-size: 9px;
@@ -112,8 +119,10 @@
 
 .mcd__slider-track {
   position: relative;
+  flex: 1 1 auto;
+  min-height: 50px;
+  max-height: 200px;
   width: 30px;
-  height: 170px;
   border-radius: 4px;
   background: linear-gradient(
     to bottom,
@@ -130,7 +139,7 @@
   position: absolute;
   left: -6px;
   right: -6px;
-  top: 65px;
+  top: 38%;
   height: 11px;
   background: #dfe6d3;
   border: 1px solid #50554f;
@@ -139,15 +148,17 @@
 }
 
 .mcd__readouts {
+  flex: 0 0 auto;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 3px;
   align-items: center;
 }
 
 .mcd__readout {
   width: 100%;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -155,7 +166,7 @@
   background: #090b08;
   border: 1px solid #22261c;
   border-radius: 12px;
-  padding: 6px 4px;
+  padding: 3px 4px;
 }
 
 .mcd__readout-icon {
@@ -170,7 +181,7 @@
 .mcd__readout-value {
   color: #b7ff53;
   font-family: "Consolas", "Courier New", monospace;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -181,23 +192,26 @@
 }
 
 .mcd__turtle {
-  font-size: 20px;
-  margin: 6px 0;
+  flex: 0 0 auto;
+  font-size: 16px;
+  line-height: 1;
   cursor: pointer;
   filter: grayscale(0.1);
 }
 
 .mcd__section-label {
+  flex: 0 0 auto;
   width: 100%;
   text-align: center;
   font-size: 10.5px;
   font-weight: 600;
   color: #cfd6c4;
   border-top: 1px solid #22261c;
-  padding-top: 9px;
+  padding-top: 4px;
 }
 
 .mcd__glyphs {
+  flex: 0 0 auto;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -209,10 +223,11 @@
   border: 1px solid #2a2d24;
   background: #171a13;
   color: #9aa294;
-  font-size: 11px;
-  height: 22px;
+  font-size: 10px;
+  height: 20px;
   border-radius: 3px;
   cursor: pointer;
+  padding: 0;
 }
 
 .mcd__glyph:hover {
@@ -224,10 +239,11 @@
 }
 
 .mcd__speeds {
+  flex: 0 0 auto;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
   font-size: 9.5px;
   color: #9aa294;
 }
@@ -244,8 +260,8 @@
 }
 
 .mcd__spacer {
-  flex: 1 1 auto;
-  min-height: 8px;
+  flex: 0 1 auto;
+  min-height: 0;
 }
 
 .mcd__return,
@@ -253,12 +269,15 @@
 .mcd__down,
 .mcd__play,
 .mcd__stop {
+  flex: 0 0 auto;
   width: 58px;
-  height: 42px;
+  height: 28px;
   border-radius: 5px;
   border: 1px solid #2a2d24;
   cursor: pointer;
-  font-size: 19px;
+  font-size: 15px;
+  line-height: 1;
+  padding: 0;
 }
 
 .mcd__return {
@@ -274,6 +293,7 @@
 }
 
 .mcd__run-row {
+  flex: 0 0 auto;
   display: flex;
   gap: 6px;
 }
@@ -291,34 +311,80 @@
 }
 
 .mcd__foot-row {
+  flex: 0 0 auto;
   display: flex;
   gap: 6px;
 }
 
 .mcd__foot-icon {
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   border: 1px solid #2a2d24;
   background: #171a13;
   color: #9be03a;
-  font-size: 12px;
+  font-size: 11px;
   cursor: pointer;
+  padding: 0;
 }
 
 .mcd__jog-speed-label {
+  flex: 0 0 auto;
   font-size: 10px;
   color: #cfd6c4;
   font-family: "Consolas", monospace;
 }
 
 .mcd__repeat {
-  width: 34px;
-  height: 34px;
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   border: 1px solid #2a2d24;
   background: linear-gradient(180deg, #dfe6d3 0%, #a9b39a 100%);
   color: #14170f;
-  font-size: 18px;
+  font-size: 15px;
+  line-height: 1;
   cursor: pointer;
+  padding: 0;
+}
+
+/* Màn hình thấp (laptop nhỏ): thu nhỏ thêm để vẫn vừa một trang */
+@media (max-height: 800px) {
+  .mcd {
+    gap: 3px;
+    padding: 4px 8px 6px;
+  }
+
+  .mcd__return,
+  .mcd__up,
+  .mcd__down,
+  .mcd__play,
+  .mcd__stop {
+    height: 22px;
+    font-size: 13px;
+  }
+
+  .mcd__glyph {
+    height: 18px;
+  }
+
+  .mcd__turtle {
+    font-size: 14px;
+  }
+
+  .mcd__repeat {
+    width: 24px;
+    height: 24px;
+    font-size: 13px;
+  }
+
+  .mcd__foot-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .mcd__slider-track {
+    min-height: 40px;
+  }
 }

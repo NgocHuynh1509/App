@@ -2,12 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 40px; /* Tăng nhẹ độ rộng/cao từ 32px lên 40px */
-  flex: 0 0 40px;
-  padding: 0 12px;
+  height: 48px;
+  flex: 0 0 48px;
+  padding: 0 150px 0 12px; /* chừa chỗ cho nút _ □ ✕ bên phải */
   background: linear-gradient(180deg, #f1f1f4 0%, #f6f6fa 100%);
   border-bottom: 2px solid #f4d03f;
   box-sizing: border-box;
+  -webkit-app-region: drag; /* kéo thanh này để di chuyển cửa sổ */
+  user-select: none;
 }
 
 .title-bar__brand {
@@ -16,12 +18,19 @@
   gap: 10px;
 }
 
-/* Định dạng logo nhỏ gọn, căn giữa khung */
 .title-bar__logo {
-  height: 26px; /* Giữ logo nhỏ nhắn, vừa vặn trong khung 40px */
+  height: 32px;
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.4));
+}
+
+/* Hai dòng chữ xếp dọc: tên trường trên, tên app dưới */
+.title-bar__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.2;
 }
 
 .title-bar__name {
@@ -29,11 +38,6 @@
   font-weight: 600;
   color: #032761;
   letter-spacing: 0.03em;
-}
-
-.title-bar__divider {
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 11px;
 }
 
 .title-bar__app-name {

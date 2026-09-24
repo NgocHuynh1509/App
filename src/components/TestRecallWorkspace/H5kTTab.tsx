@@ -25,6 +25,7 @@ export default function H5kTTab({ liveData, curve, specimens, onRegenerate }: Pr
   const areaMm2 = (activeSpecimen?.area ?? 0) * IN2_TO_MM2;
   const forceN = liveData.force * LBF_TO_N;
   const sigma = areaMm2 > 0 ? forceN / areaMm2 : 0;
+  void sigma;
 
   // ε = độ dịch chuyển LŨY KẾ kể từ khi mẫu (specimen) hiện tại bắt đầu
   // test, quy đổi sang mm (nhãn hiển thị dùng ký hiệu epsilon "ε" thay cho
@@ -215,7 +216,7 @@ export default function H5kTTab({ liveData, curve, specimens, onRegenerate }: Pr
               thay vì dùng .h5kt-live-row (vốn có height cố định 24px). */}
           <section className="h5kt-panel h5kt-sigma-eps-panel">
             <div className="h5kt-panel-header">
-              <span>σ / ε</span>
+              <span>ε/Δx</span>
               <div className="h5kt-panel-actions">
                 <button title="Minimize">_</button>
                 <button title="Close">✕</button>

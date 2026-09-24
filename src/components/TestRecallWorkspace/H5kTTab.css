@@ -288,7 +288,7 @@ body,
 
 .h5kt-sigma-eps-label {
   flex: 0 0 auto;
-  font-size: clamp(1.4rem, 3.2vw, 2.1rem);
+  font-size: clamp(1.1rem, 2.4vw, 1.6rem);
   font-weight: 700;
   font-style: italic;
   color: #72b41c;
@@ -299,7 +299,7 @@ body,
   min-width: 0;
   text-align: right;
   font-family: "Consolas", monospace;
-  font-size: clamp(1.6rem, 4.2vw, 2.6rem);
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
   font-weight: 700;
   color: #79f82e;
   line-height: 1;
@@ -310,7 +310,7 @@ body,
 
 .h5kt-sigma-eps-unit {
   flex: 0 0 auto;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #6a7360;
 }
 
